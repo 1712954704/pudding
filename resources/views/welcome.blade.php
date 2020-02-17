@@ -300,6 +300,7 @@
                     <h2 class="header_title">php程序员</h2>
                     <h2 class="header_title">艰难困苦玉汝于成</h2>
                     <h2 class="header_title">艰难困苦玉汝于成</h2>
+                    <h2 class="header_title">艰难困苦玉汝于成</h2>
                 </div>
                 <canvas id="canvas">
                 </canvas>
