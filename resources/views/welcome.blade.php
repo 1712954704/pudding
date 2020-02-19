@@ -298,7 +298,6 @@
                 <div class="title">
                     <h1><a href="http://www.pudding.test">徐振的个人博客吖</a></h1>
                     <h2 class="header_title">php程序员</h2>
-                    <h2 class="header_title">武汉加油!!!</h2>
                     <h2 class="header_title">艰难困苦玉汝于成</h2>
                 </div>
                 <canvas id="canvas">
