@@ -70,7 +70,7 @@
         <div class="login">
             <h2 style="margin-bottom: 60px;">后台管理系统</h2>
             <input class="import" type="text" v-model="user" placeholder="请输入用户名">
-            <input class="import" type="text" v-model="pwd" placeholder="请输入密码">
+            <input class="import" type="password" v-model="pwd" placeholder="请输入密码">
             <a class="enter" v-on:click="login">登录</a>
         </div>
     </div>
@@ -96,6 +96,7 @@
                     this.mainStyleObj.width=document.documentElement.clientWidth+'px';
                 },
                 login(){
+                    console.log('ceshi');
                     // 发送 POST 请求
                     axios({
                         method: 'post',
