@@ -26,8 +26,9 @@ Route::get('/particle',function (){
 //后台
 
 Route::namespace("Admin")->prefix('admin')->group(function(){
-    Route::get('back','LoginController@Index');
-    Route::post('register','LoginController@register');
+    Route::get('back','LoginController@Index');                     // 后台登录页
+    Route::post('register','LoginController@register');             // 后台登录验证
+    Route::get('entire','LoginController@entire');                 // 后台首页
 });
 \Illuminate\Support\Facades\Auth::routes();
 Auth::routes();

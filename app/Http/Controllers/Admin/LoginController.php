@@ -18,10 +18,17 @@ class LoginController extends Controller
      * 登录
     */
     public function register(Request $request){
-        dd($request->user);
+//        dd($request->user);
         $data['code'] = 200;
         $data['msg'] = 'success';
         $data['data'] = '23213';
         return $data;
+    }
+
+    /**
+     * 后台首页
+    */
+    public function entire(){
+        return view("admin.entire.index");
     }
 }

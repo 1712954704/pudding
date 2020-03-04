@@ -96,7 +96,7 @@
                     this.mainStyleObj.width=document.documentElement.clientWidth+'px';
                 },
                 login(){
-                    console.log('ceshi');
+                    // console.log('ceshi');
                     // 发送 POST 请求
                     axios({
                         method: 'post',
@@ -107,9 +107,11 @@
                         },
                         headers:{ '_token':'{{csrf_token()}}'},
                     }).then(function(response) {
-                        console.log(response);
+                        // console.log(response);
+                        console.log('成功');
+                        window.location.href="/admin/entire";
                     }).catch(function (error) {
-                        console.log(error);
+                        console.log('失败');
                     });
                 },
             },

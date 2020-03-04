@@ -209,7 +209,7 @@
             max-width: 892px;
             margin: 0 auto;
             padding: 0 10px;
-            height: 800px;
+            /*height: 800px;*/
         }
 
         #ribbon{
@@ -256,6 +256,12 @@
             color: #15171a;
             font-size: 16px;
             margin: 10px 0;
+        }
+
+        .bottom{
+            display: flex;
+            justify-content: center;
+            background-color: black;
         }
 
         @keyframes myfirst
@@ -444,6 +450,9 @@
                     </article>
                 </div>
             </div>
+        </div>
+        <div class="bottom">
+            <a target="_blank"  href="http://www.beian.miit.gov.cn">苏ICP备18039192号-1</a>
         </div>
     </div>
 @stop
