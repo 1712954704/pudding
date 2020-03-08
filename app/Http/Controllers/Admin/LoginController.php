@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
     /**
      * 登录页
@@ -14,15 +16,32 @@ class LoginController extends Controller
         return view("admin.login.index");
     }
 
+
     /**
      * 登录
     */
     public function register(Request $request){
-//        dd($request->user);
-        $data['code'] = 200;
-        $data['msg'] = 'success';
-        $data['data'] = '23213';
-        return $data;
+        $username = $request->user;
+        $password = $request->pwd;
+
+//        Hash::make('123456');  // password加密方式
+        // 验证用户名登录方式
+        $emailLogin = $this->guard()->attempt(
+            ['name' => $username, 'password' => $password],true
+        );
+
+        if($emailLogin){
+            return layui_json();
+        }
+        return layui_json(201,'用户名或密码错误');
+    }
+
+    /**
+     * 重写验证时使用的用户名字段.
+     */
+    public function username()
+    {
+        return 'name';
     }
 
     /**

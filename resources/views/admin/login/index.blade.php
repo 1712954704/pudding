@@ -24,10 +24,13 @@
             display: flex;
             flex-direction: column;
             border:1px solid #fdfff8;
-            padding: 70px;
+            padding: 40px;
             background-color: #fdfff8;
             opacity: 0.6;
             border-radius: 5px;
+            width: 25%;
+            height: 50%;
+            text-align: center;
         }
 
         .import{
@@ -38,18 +41,25 @@
         .enter{
             cursor:pointer;
             /* placeholder颜色  */
-            color: #aab2bd;
+            color: #616161;
             /* placeholder字体大小  */
             font-size: 14px;
             /* placeholder位置  */
             text-align: center;
             background-color: #cacaca;
+            border-radius: 5px;
+            height: 50px;
+            display: table;
+            position: relative;
+            bottom: -10%;
         }
 
         input{
             background:none;
-            outline:none;
-            border:1px solid #b8ce6c;
+            /*outline:none;*/
+            border:1px solid #d4d4d4;
+            height: 50px;
+            padding: 0px 16px;
         }
         input:focus{
             border:none;
@@ -63,15 +73,28 @@
             /* placeholder位置  */
             text-align: center;
         }
+
+        .login_center{
+            display:flex;
+            flex-direction: column;
+            justify-content:center;
+        }
+
+        .field_center{
+            display: table-cell;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div id="main" :style="mainStyleObj">
         <div class="login">
-            <h2 style="margin-bottom: 60px;">后台管理系统</h2>
-            <input class="import" type="text" v-model="user" placeholder="请输入用户名">
-            <input class="import" type="password" v-model="pwd" placeholder="请输入密码">
-            <a class="enter" v-on:click="login">登录</a>
+            <div class="login_center">
+                <h2 style="margin-bottom: 60px;">管理登录</h2>
+                <input class="import" type="text" v-model="user" placeholder="请输入用户名">
+                <input class="import" type="password" v-model="pwd" placeholder="请输入密码">
+                <div class="enter" v-on:click="login"><div class="field_center">登录</div></div>
+            </div>
         </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -106,12 +129,15 @@
                             pwd: this.pwd,
                         },
                         headers:{ '_token':'{{csrf_token()}}'},
-                    }).then(function(response) {
-                        // console.log(response);
-                        console.log('成功');
-                        window.location.href="/admin/entire";
+                    }).then(function(data) {
+                        console.log(data);
+                        if(data.data.code == 200){
+                            window.location.href="/admin/entire";
+                        }else{
+                            alert(data.data.msg);
+                        }
                     }).catch(function (error) {
-                        console.log('失败');
+                        // console.log('失败');
                     });
                 },
             },

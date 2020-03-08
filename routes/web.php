@@ -25,12 +25,15 @@ Route::get('/particle',function (){
 
 //后台
 
-Route::namespace("Admin")->prefix('admin')->group(function(){
-    Route::get('back','LoginController@Index');                     // 后台登录页
-    Route::post('register','LoginController@register');             // 后台登录验证
-    Route::get('entire','LoginController@entire');                 // 后台首页
+Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
+    Route::get('back','LoginController@Index');                 // 后台登录页
+    Route::post('register','LoginController@register');         // 后台登录验证
+    Route::group(['middleware'=>'AuthUsers'],function(){
+        Route::get('entire','LoginController@entire');              // 后台首页
+        Route::get('fiction','FictionController@index');            // 后台小说首页
+        Route::get('table','TableController@index');            // 后台表格首页
+    });
 });
-\Illuminate\Support\Facades\Auth::routes();
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

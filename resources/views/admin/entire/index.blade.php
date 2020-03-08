@@ -5,14 +5,36 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    {{--左下角人物--}}
+    {{--<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>--}}
+    {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">--}}
+    {{--<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>--}}
+    <script src="/js/ali/iconfont.js"></script>
+    <title>@yield('title', '后台首页')</title>
+    @section('resource')
+        <script src="{{ asset('js/vue.js') }}"></script>
+    @show
     <style>
-        a {
+        {{--阿里样式--}}
+        .nav_icon {
+            width: 2em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+        #top a {
             color: #212121;
             text-shadow: none;
             text-decoration:none;
+            margin: auto;
+            white-space: nowrap;
+            font-size: 16px;
         }
-        a:hover{
+        #top a:hover{
             color: #00A1D6;
         }
         input {
@@ -24,25 +46,26 @@
         #top{
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
+            /*justify-content: flex-start;*/
+            align-items: center;
             background: #fff;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+            padding: 0 0px 10px 0;
         }
         .top_interval{
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            width:30%;
+            margin: 0 0 0 36px;
         }
         .nav_search{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 500px;
+            width: 30%;
             transition: 0.3s width;
-        }
-        .top_interval li{
-            list-style-type:none;
-            margin-right: 26px;
+            position: relative;
         }
         #nav_fromsearch{
             background: #F4F4F4;
@@ -52,6 +75,7 @@
         }
         #nav_fromsearch input{
             height: 34px;
+            width: 100%;
         }
 
         /*会员头像*/
@@ -59,59 +83,45 @@
             width: 26px;
             height: 24px;
             border-radius: 50%;
+            margin: 6px 0 0 0;
         }
+        @section('style')
+        @show
     </style>
 </head>
 <body>
 <div id="top">
-    <div>
-        <ul class="top_interval">
-            <li>
-                <a href="">bilibili</a>
-            </li>
-            <li>
-                <a href="">游戏</a>
-            </li>
-            <li>
-                <a href="">小说</a>
-            </li>
-            <li>
-                <a href="">漫画</a>
-            </li>
-            <li>
-                <a href="">番剧</a>
-            </li>
-        </ul>
+    <div class="top_interval">
+        <a href="">bilibili</a>
+        <a href="">游戏</a>
+        <a href="/admin/fiction">小说</a>
+        <a href="">漫画</a>
+        <a href="">番剧</a>
     </div>
     <div class="nav_search">
-        <from id="nav_fromsearch">
+        <div id="nav_fromsearch">
             <input type="text" placeholder="请输入">
-        </from>
+            <svg class="nav_icon" aria-hidden="true">
+                <use xlink:href="#icon-sousuo2"></use>
+            </svg>
+        </div>
     </div>
-    <div>
-        <ul class="top_interval">
-            <li>
-                <div>
-                    <img class="head_img" src="/imgs/home_index/head.webp" alt="">
-                </div>
-            </li>
-            <li>
-                <a href="">会员</a>
-            </li>
-            <li>
-                <a href="">消息</a>
-            </li>
-            <li>
-                <a href="">动态</a>
-            </li>
-            <li>
-                <a href="">收藏</a>
-            </li>
-            <li>
-                <a href="">历史</a>
-            </li>
-        </ul>
+    <div class="top_interval">
+        <a>
+            <img class="head_img" src="/imgs/home_index/head.webp" alt="">
+        </a>
+        <a href="/admin/table">表格</a>
+        <a href="">消息</a>
+        <a href="">动态</a>
+        <a href="">收藏</a>
+        <a href="">历史</a>
     </div>
 </div>
+@section('content')
+@show
+<script>
+    @section('js')
+    @show
+</script>
 </body>
 </html>
