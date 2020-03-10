@@ -9,8 +9,12 @@
     {{--<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>--}}
     {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">--}}
     {{--<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>--}}
+    <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}">
     <script src="/js/ali/iconfont.js"></script>
+    <script src="{{ asset('layui/layui.js') }}"></script>
     <script src="{{ asset('js/vue.js') }}"></script>
+    <script  src="{{ asset('js/jquery-3.0.0.js') }}" charset="utf-8"></script>
+
     <title>@yield('title', '后台首页')</title>
     @section('resource')
     @show
@@ -119,9 +123,8 @@
 </div>
 @section('content')
 @show
-<script>
-    @section('js')
-    @show
-</script>
+<script type=“text/html” src="{{ asset('layui/layui.js') }}" charset="utf-8"></script>
+@section('js')
+@show
 </body>
 </html>

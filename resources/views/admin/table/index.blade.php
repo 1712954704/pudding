@@ -1,9 +1,16 @@
 @extends("admin.entire.index")
 @section('title','表格')
-@section('resource');
+@section('resource')
 <script src="/js/ali/detail.js"></script>
+<link rel="stylesheet" href="{{ asset('layui/extend/ext/animate.min.css') }}"/>
+<link rel="stylesheet" href="{{ asset('layui/extend/ext/soulTable.css') }}"/>
 @stop
 @section('style')
+    .layui-table-view .layui-table {width:100%}
+    .layui-table-cell {
+        height: 50px;
+        {{--height: inherit;--}}
+    }
     {{--阿里样式--}}
     .icon {
     width: 2em;
@@ -153,117 +160,6 @@
     .rgt_search:focus-within{
         border-color:#00a1d6;
     }
-    .choice{
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-        padding: 0 0 0 6px;
-        width: 16%;
-        overflow: hidden;
-        color: #555;
-        text-shadow: none;
-        transition: box-shadow 0.25s ease;
-        z-index: 2;
-        text-align: center;
-        border-right: 1px solid #ccd0d7
-    }
-    .choice:hover{
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    }
-    choice:before {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        border: 10px solid transparent;
-        border-top-color: #ccc;
-        top: 14px;
-        right: 10px;
-        cursor: pointer;
-        z-index: -2;
-    }
-    .choice select{
-        cursor: pointer;
-        width: 100%;
-        border: none;
-        background: transparent;
-        background-image: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-    .choice select:focus {
-        outline: none;
-    }
-    .import{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    .rgt_table{
-        margin: 20px 20px 20px;
-    }
-    .small_item{
-        padding: 0;
-        margin: 0 20px 20px 0;
-        border-radius: 4px;
-        border: 1px solid #fff;
-        box-sizing: border-box;
-        width:17%;
-        {{--width: 190px;--}}
-        float: left;
-    }
-    .small_item a img{
-        width: 100%;
-        border-radius: 4px;
-    }
-    .table_detail{
-        margin-top: 6px;
-        overflow: hidden;
-        display: block;
-    }
-    .table_time{
-        font-size: 12px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .time_place{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .detail_place{
-        display: flex;
-        flex-direction: row-reverse;
-    }
-    .paging{
-        text-align: center
-    }
-    .paging li{
-        display:inline-block;
-        line-height: 38px;
-        padding: 0 15px;
-        margin-right: 4px;
-        text-align: center;
-        list-style: none;
-        background-color: #fff;
-        -ms-user-select: none;
-        user-select: none;
-        cursor: pointer;
-        font-family: Arial;
-        font-size: 14px;
-        border: 1px solid #d7dde4;
-        border-radius: 4px;
-    }
-    .paging input{
-        border-radius: 4px;
-        margin: 4px 8px;
-        width: 50px;
-        line-height: 28px;
-        height: 28px;
-        padding: 0 10px;
-        vertical-align: top;
-        border: 1px solid #ccd0d7;
-    }
 @stop
 @section('content')
     <div class="body" id="table">
@@ -290,173 +186,102 @@
                         <div class="rgt_default_infor">
                             <span class="infor_name">创建者:徐振</span>
                             <span>0个内容 &nbsp; · &nbsp; 公开</span>
-                            <div class="rgt_detail">
-                                <span href="">查看全部</span>
+                            <div id="jump" class="rgt_detail">
+                                <span href="">添加</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="rgt_handle">
-                    <div class="rgt_search">
-                        <div class="choice">
-                            <select name="" id="">
-                                <option value="1">当前</option>
-                                <option value="2">所有</option>
-                            </select>
-                        </div>
-                        <div class="import">
-                            <input type="text" placeholder="输入关键词" style="margin: 0px 0px 0 3px;">
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-sousuo2"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <span><a href="">批量操作</a></span>
-                </div>
-                <div>
-                    <div class="rgt_table">
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="small_item">
-                            <a href="">
-                                <img src="/imgs/back/1.jpg" alt="">
-                            </a>
-                            <a href="" class="table_detail">王牌大间谍</a>
-                            <div class="time_place">
-                                <span class="table_time">创建于2020.3.10</span>
-                                <div class="detail_place">
-                                    <svg class="detailIcon" aria-hidden="true">
-                                        <use xlink:href="#icon-xiangqing5"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="paging">
-                    <ul>
-                        <li>第一页</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>下一页</li>
-                        <span>共3页</span>
-                        <span>
-                            跳至
-                            <input type="text">
-                            页
-                        </span>
-                    </ul>
-                </div>
+                <div class="layui-card-body" id="table_id">
+                    <table id="myTable" ></table>
                 </div>
             </div>
         </div>
     </div>
 @stop
 @section('js')
-    var app = new Vue({
-        el : '#table',
-        data(){
-            return {
-            };
-        },
-        methods:{
-        }
-    })
+<script>
+    {{--layui--}}
+    {{--自定义模块--}}
+    layui.config({
+        base: '/layui/extend/ext/',   // 模块目录
+        version: 'v1.3.4'
+    }).extend({                         // 模块别名
+        soulTable: 'soulTable'
+        // soulTable: 'tableChild'
+    });
+
+    layui.use(['layer', 'form','soulTable'], function(){
+        var table = layui.table,
+        layer = layui.layer
+        ,form = layui.form;
+        soulTable = layui.soulTable;
+        $ = layui.$;
+
+        table.render({
+            elem: '#myTable'
+            ,url: "{{url('admin/table/{table}')}}" //数据接口
+            {{--,height: full-200--}}
+            ,toolbar: true
+            ,totalRow: true
+            ,limit: 20
+            ,page: true
+            ,rowDrag: {/*trigger: 'row',*/ done: function(obj) {
+                // 完成时（松开时）触发
+                // 如果拖动前和拖动后无变化，则不会触发此方法
+                console.log(obj.row) // 当前行数据
+                console.log(obj.cache) // 改动后全表数据
+                console.log(obj.oldIndex) // 原来的数据索引
+                console.log(obj.newIndex) // 改动后数据索引
+            }}
+            ,totalRow: true
+            ,cols: [[
+                {{--{type: 'radio', title: '##', fixed: 'left'},--}}
+                {{--{type: 'checkbox', title: '##', fixed: 'left'},--}}
+                // {field: 'title', title: '名称', fixed: 'left', totalRowText: '合计',filter: true},
+                {field: 'title', title: '名称', fixed: 'left', totalRowText: '合计',filter: true},
+                {field: 'num', title: '数量', sort: true,totalRow: true},
+                {field: 'detail', title: '描述', },
+                {{--{field: 'content', title: '内容',},--}}
+                {field: 'created_at', title: '录入时间', }
+                // {field: 'updated_at', title: '更新时间', }
+            ]]
+            ,autoColumnWidth: {
+                init: true
+            }
+            ,done: function () {
+                soulTable.render(this);
+                // AutoTableHeight();
+            }
+        });
+
+        function AutoTableHeight()
+         {
+              var dev_obj = document.getElementById('table_id'); //table的父div
+              
+              var layuitable_main = dev_obj.getElementsByClassName("layui-table-main"); //在父div中找 layui-table-main 属性所在标签
+             // console.log(layuitable_main);
+             // layuitable_main[0].style.height = '600px';
+            //   if (layuitable_main != null && layuitable_main.length > 0) {
+            //    layuitable_main[0].style.height = '100%';
+            //   }
+            //   
+            //   var layuitable = dev_obj.getElementsByClassName("layui-form"); //在父div中找 layui-form 属性所在标签
+            //   if (layuitable != null && layuitable.length > 0) {
+            //       layuitable[0].style.height = '100%';
+            //   }
+         }
+
+        $(document).on('click', '#jump', function () {
+            layer.open({
+                type: 2,
+                title: '表格添加',
+                content: '/admin/table/create',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '600px'],
+                resize: false
+            });
+        });
+    });
+</script>
 @stop

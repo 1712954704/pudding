@@ -29,9 +29,11 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
     Route::get('back','LoginController@Index');                 // 后台登录页
     Route::post('register','LoginController@register');         // 后台登录验证
     Route::group(['middleware'=>'AuthUsers'],function(){
-        Route::get('entire','LoginController@entire');              // 后台首页
-        Route::get('fiction','FictionController@index');            // 后台小说首页
-        Route::get('table','TableController@index');            // 后台表格首页
+        Route::get('entire','LoginController@entire');          // 后台首页
+        Route::get('fiction','FictionController@index');        // 后台小说首页
+//        Route::get('table','TableController@index');            // 后台表格首页
+//        Route::get('append','TableController@add');              // 后台表格添加
+        Route::resource('table', 'TableController');            //后台表格资源路由
     });
 });
 
