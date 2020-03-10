@@ -1,5 +1,8 @@
 @extends("admin.entire.index")
 @section('title','表格')
+@section('resource');
+<script src="/js/ali/detail.js"></script>
+@stop
 @section('style')
     {{--阿里样式--}}
     .icon {
@@ -9,6 +12,19 @@
     fill: currentColor;
     overflow: hidden;
     }
+    {{--详情 --}}
+    .detailIcon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    }
+    {{--取消ul样式--}}
+    ul{
+        list-style: none;
+    }
+
     a {
         color: #212121;
         text-shadow: none;
@@ -109,14 +125,13 @@
         color: #fff;
         line-height: 32px;
         text-align: center;
-        margin-right: 42px;
+        margin-top: 20px;
         cursor: pointer;
-        position: absolute;
-        bottom: 0;
     }
     .rgt_handle{
         display: flex;
         flex-direction: row-reverse;
+        margin-top: 15px;
     }
     .rgt_search{
         display:flex;
@@ -198,7 +213,56 @@
         float: left;
     }
     .small_item a img{
-      width: 100%;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .table_detail{
+        margin-top: 6px;
+        overflow: hidden;
+        display: block;
+    }
+    .table_time{
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .time_place{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .detail_place{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .paging{
+        text-align: center
+    }
+    .paging li{
+        display:inline-block;
+        line-height: 38px;
+        padding: 0 15px;
+        margin-right: 4px;
+        text-align: center;
+        list-style: none;
+        background-color: #fff;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        font-family: Arial;
+        font-size: 14px;
+        border: 1px solid #d7dde4;
+        border-radius: 4px;
+    }
+    .paging input{
+        border-radius: 4px;
+        margin: 4px 8px;
+        width: 50px;
+        line-height: 28px;
+        height: 28px;
+        padding: 0 10px;
+        vertical-align: top;
+        border: 1px solid #ccd0d7;
     }
 @stop
 @section('content')
@@ -249,44 +313,137 @@
                     </div>
                     <span><a href="">批量操作</a></span>
                 </div>
-                <div class="rgt_table">
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
+                <div>
+                    <div class="rgt_table">
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small_item">
+                            <a href="">
+                                <img src="/imgs/back/1.jpg" alt="">
+                            </a>
+                            <a href="" class="table_detail">王牌大间谍</a>
+                            <div class="time_place">
+                                <span class="table_time">创建于2020.3.10</span>
+                                <div class="detail_place">
+                                    <svg class="detailIcon" aria-hidden="true">
+                                        <use xlink:href="#icon-xiangqing5"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="small_item">
-                        <a href="">
-                            <img src="/imgs/back/1.jpg" alt="">
-                        </a>
-                    </div>
-
-
+                </div>
+                <div class="paging">
+                    <ul>
+                        <li>第一页</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>下一页</li>
+                        <span>共3页</span>
+                        <span>
+                            跳至
+                            <input type="text">
+                            页
+                        </span>
+                    </ul>
+                </div>
                 </div>
             </div>
         </div>

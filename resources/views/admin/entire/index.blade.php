@@ -10,9 +10,9 @@
     {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">--}}
     {{--<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>--}}
     <script src="/js/ali/iconfont.js"></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
     <title>@yield('title', '后台首页')</title>
     @section('resource')
-        <script src="{{ asset('js/vue.js') }}"></script>
     @show
     <style>
         {{--阿里样式--}}
