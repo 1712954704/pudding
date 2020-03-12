@@ -49,7 +49,7 @@ return [
 
         'user' => [
           'driver' => 'session',
-          'provider' => 'users',
+          'provider' => 'user',
         ],
     ],
 
@@ -71,7 +71,7 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'user' => [
             'driver' => 'eloquent',
             'model' => App\Models\Front\Users::class,
         ],
