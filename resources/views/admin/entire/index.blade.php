@@ -100,7 +100,7 @@
         <a href="">游戏</a>
         <a href="/admin/fiction">小说</a>
         <a href="">漫画</a>
-        <a href="">番剧</a>
+        <a href="/admin/drama">番剧</a>
     </div>
     <div class="nav_search">
         <div id="nav_fromsearch">

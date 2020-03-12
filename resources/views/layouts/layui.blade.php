@@ -25,9 +25,7 @@
 @section('content')
 @show
 <script type=“text/html” src="{{ asset('layui/layui.js') }}" charset="utf-8"></script>
-<script>
 @section('js')
 @show
-</script>
 </body>
 </html>
