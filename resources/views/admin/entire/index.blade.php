@@ -89,9 +89,10 @@
             border-radius: 50%;
             margin: 6px 0 0 0;
         }
-        @section('style')
-        @show
     </style>
+    @section('style')
+        <style></style>
+    @show
 </head>
 <body>
 <div id="top">
