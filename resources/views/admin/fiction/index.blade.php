@@ -1,6 +1,7 @@
 @extends("admin.entire.index")
 @section('title','小说')
 @section('style')
+    <style>
     .body{
         display:flex;
         flex-direction:column;
@@ -14,6 +15,7 @@
         height: 200px;
         background-repeat: no-repeat;
     }
+    </style>
 @stop
 @section('content')
     <div class="body">

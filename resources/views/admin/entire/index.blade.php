@@ -91,7 +91,6 @@
         }
     </style>
     @section('style')
-        <style></style>
     @show
 </head>
 <body>
