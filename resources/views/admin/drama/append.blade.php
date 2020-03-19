@@ -8,7 +8,7 @@
                 <label class="layui-form-label"><span class="x-red">*</span>名称</label>
                 {{ csrf_field() }}
                 <div class="layui-input-inline">
-                    <input type="text" name="name"  autocomplete="off" class="layui-input">
+                    <input type="text" name="title"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div>
@@ -85,7 +85,7 @@
                 // $ = layui.$;
             // 监听提交
             form.on('submit(formDemo)', function(data){
-                console.log(data.field);
+                // console.log(data.field);
                 $.ajax({
                     url:'{{url('admin/drama')}}',
                     method:'post',

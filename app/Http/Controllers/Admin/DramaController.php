@@ -13,7 +13,7 @@ class DramaController extends BaseController
 	 * 番剧首页
     */
     public function index(){
-    	return view('admin.drama.index');
+		return view('admin.drama.index');
 	}
 	
 	/**
