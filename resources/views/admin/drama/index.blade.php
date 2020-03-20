@@ -209,7 +209,7 @@
     </div>
     <div class="table_body">
         <div class="table_detail" id="table_id">
-            <table id="myTable" ></table>
+            <table id="myTable" lay-filter="test"></table>
         </div>
     </div>
 @stop
@@ -218,12 +218,13 @@
         <div><button class="layui-btn layui-btn-sm" lay-event="clearFilter">清除所有筛选条件</button></div>
     </script>
     <script type="text/html" id="bar">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        {{--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>--}}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     <script>
         {{--layui--}}
         {{--自定义模块--}}
+        // 表格
         layui.config({
             base: '/layui/extend/ext/',   // 模块目录
             version: 'v1.3.4'
@@ -231,6 +232,7 @@
             soulTable: 'soulTable'
             // soulTable: 'tableChild'
         });
+
 
         layui.use(['layer', 'form', 'table','soulTable'], function () {
             var table = layui.table,
@@ -242,7 +244,7 @@
             table.render({
                 elem: '#myTable'
                 ,id: 'myTable'
-                ,url: "{{url('admin/table/{table}')}}" //数据接口
+                ,url: "{{url('admin/drama/{drama}')}}" //数据接口
                 // ,url: 'https://soultable.saodiyang.com/back/poetry/dataGrid'
                 ,toolbar: '#toolbar'
                 // ,toolbar: true
@@ -259,22 +261,9 @@
                     }}
                 ,totalRow: true
                 ,cols: [[
-
-                    // {type: 'checkbox', fixed: 'left'},
-                    // {field: 'title', title: '诗词', width: '10%', sort: true, filter: true},
-                    // {field: 'dynasty', title: '朝代', width: '10%', sort: true, filter: true},
-                    // {field: 'author', title: '作者', width: '10%' , filter: true},
-                    // {field: 'content', title: '内容', width: '10%', filter: true},
-                    // {field: 'type', title: '类型', width: '10%',  filter: {split:','}, sort:true},
-                    // {field: 'heat', title: '点赞数', width: '10%',  filter: true, fixed: 'right', sort:true, excel:{cellType: 'n'}},
-                    // {field: 'createTime', title: '录入时间', width: '10%', fixed: 'right', filter: {type: 'date[yyyy-MM-dd HH:mm:ss]'}, sort:true},
-                    // {title: '操作', width: '30%', fixed: 'right', templet: '#bar'}
-                    // {type: 'radio', title: '##', fixed: 'left'},
-                    // {type: 'checkbox', title: '##', fixed: 'left'},
-                    // {field: 'title', title: '名称', fixed: 'left', totalRowText: '合计',filter: true},
                     {field: 'title', title: '名称',width:'20%', sort: true, filter: true, totalRowText: '合计'},
-                    {field: 'num', title: '数量',width:'20%', sort: true,filter: true,totalRow: true},
-                    {field: 'detail', width:'20%',title: '描述',filter: true, },
+                    {field: 'address', title: '地址',width:'40%', event: 'play', sort: true,filter: true,totalRow: true},
+                    // {field: 'detail', width:'20%',title: '描述',filter: true, },
                     // {field: 'content', title: '内容',},
                     {field: 'created_at',width:'10%', title: '录入时间', filter: true,},
                     {field: 'updated_at',width:'10%', title: '更新时间', filter: true,},
@@ -283,6 +272,50 @@
                 ,done: function (res, curr, count) {
                     soulTable.render(this);
                     AutoTableHeight();
+                }
+            });
+
+            //监听单元格事件
+            table.on('tool(test)', function(obj) {
+                var data = obj.data;
+                if (obj.event === 'play') {
+                    var json=eval('('+JSON.stringify(data)+')');//String转json
+                    layer.open({
+                        type: 2,
+                        title: '视频播放',
+                        content: "/admin/play"+"?address="+json['address'],
+                        maxmin: true, //开启最大化最小化按钮
+                        area: ['800px', '600px'],
+                        // resize: false,
+                        offset: 'auto'
+                    });
+                }else if(obj.event == 'del'){
+                    layer.confirm('删除后不可恢复，确认删除吗？', function(index){
+                        var json=eval('('+JSON.stringify(data)+')');//String转json
+                        $.ajax({
+                            // url:'/admin/staff_del',
+                            url: "{{url('/admin/drama')}}"+'/'+json['id'],
+                            method:'delete',
+                            data:{"id":json['id']},
+                            dataType:'JSON',
+                            async : true,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success:function(data){
+                                if(data.code == 0){
+                                    layer.msg('删除成功');
+                                    obj.del();
+                                    layer.close(index);
+                                }else{
+                                    layer.msg('删除失败');
+                                }
+                            },
+                            error:function (data) {
+                                layer.msg('删除失败');
+                            }
+                        })
+                    });
                 }
             });
 
@@ -298,6 +331,7 @@
             });
         });
 
+        //表格宽高调整
         function AutoTableHeight()
         {
             var dev_obj = document.getElementById('table_id'); //table的父div

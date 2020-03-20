@@ -48,10 +48,6 @@ class TableController extends BaseController
 	
 		$filterSos = $request->filterSos;
 		
-//		$filed['tag_name'] = "F";
-//		$sql = proSearchParam(json_decode($_POST['filterSos'], true), "", true);
-//		$sql = proSearchParam(json_decode($filterSos, true), "", true);
-	
 		if($filterSos){
 			$sql = proSearchParam(json_decode($filterSos, true), "", true);
 			if($sql){
@@ -66,15 +62,8 @@ class TableController extends BaseController
 		$data = DB::select($tableSql,[$this->guard()->id(),$offset,$limit]);
         $count = Table::where('user_id', $this->guard()->id())->count();
 
-//		dd($data);
 //		dd(DB::getQueryLog());
-//
 		return layui_json(0,'success',$data,$count);
-	
-	
-//		$res['data'] = Table::where('user_id',$this->guard()->id())->offset($offset)->limit($limit)->get()->toArray();
-//        $res['count'] = Table::where('user_id', $this->guard()->id())->offset($offset)->limit($limit)->get()->count();
-//        return layui_json(0, 'success', $res['data'], $res['count']);
     }
 	
 	/**
@@ -82,17 +71,12 @@ class TableController extends BaseController
 	 */
 	public function infor(Request $request){
 		$res = Table::where('user_id',$this->guard()->id())->get()->toArray();
-		$data['title'] = array_unique(array_column($res, 'title'));
-		$data['num'] = array_unique(array_column($res, 'num'));
-		$data['detail'] = array_unique(array_column($res, 'detail'));
-		$data['created_at'] = array_unique(array_column($res, 'created_at'));
-		$data['updated_at'] = array_unique(array_column($res, 'updated_at'));
-//		dd($cagids);
-//		$data['title'] = array_values(Table::where('user_id',$this->guard()->id())->get('title')->toArray());
-//		$data['num'] = array_values(Table::where('user_id',$this->guard()->id())->get('num')->toArray());
-//		$data['detail'] = array_values(Table::where('user_id',$this->guard()->id())->get('detail')->toArray());
-//		$data['created_at'] = array_values(Table::where('user_id',$this->guard()->id())->get('created_at')->toArray());
-//		$data['updated_at'] = array_values(Table::where('user_id',$this->guard()->id())->get('updated_at')->toArray());
+//		$data['title'] = array_unique(array_column($res, 'title'));
+		$data['title'] = array_column($res, 'title');
+		$data['num'] = array_column($res, 'num');
+		$data['detail'] = array_column($res, 'detail');
+		$data['created_at'] = array_column($res, 'created_at');
+		$data['updated_at'] = array_column($res, 'updated_at');
 		return json_encode($data);
 	}
 

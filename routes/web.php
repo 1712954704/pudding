@@ -34,8 +34,10 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
 //        Route::get('table','TableController@index');            // 后台表格首页
 //        Route::get('append','TableController@add');              // 后台表格添加
         Route::resource('table', 'TableController');              //后台表格资源路由
-		Route::post('table/{id}','TableController@infor');			// soultable重载数据
+		Route::post('table/{id}','TableController@infor');			// soultable重载数据表格
 		Route::resource('drama', 'DramaController');              //后台番剧资源路由
+		Route::post('drama/{id}', 'DramaController@infor');       //soultable重载数据番剧
+		Route::get('play', 'DramaController@play');               //視頻播放
         Route::get('infor', function (){
             return view('admin.table.infor');
         });            //后台表格资源路由测试
