@@ -7,6 +7,7 @@ use App\Models\Video;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DramaController extends BaseController
 {
@@ -91,8 +92,11 @@ class DramaController extends BaseController
 	*/
 	public function destroy($id){
 		$data = Video::query()->find($id);
-//		dd($data['address']);
-		dd($data->address);
-		File::delete();
+		$file = pathinfo($data->address);
+		$res = Storage::disk('drama')->delete('drama'.$file['filename']);
+		if ($res){
+			return layui_json(200,'删除成功');
+		}
+		return layui_json(201,'删除失败');
 	}
 }

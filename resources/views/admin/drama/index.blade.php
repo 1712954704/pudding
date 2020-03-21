@@ -303,16 +303,16 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                             },
                             success:function(data){
-                                if(data.code == 0){
-                                    layer.msg('删除成功');
+                                if(data.code == 200){
+                                    layer.msg(data.msg);
                                     obj.del();
                                     layer.close(index);
-                                }else{
-                                    layer.msg('删除失败');
+                                }else if(data.code = 201){
+                                    layer.msg(data.msg);
                                 }
                             },
                             error:function (data) {
-                                layer.msg('删除失败');
+                                layer.msg('网络延迟,请重试');
                             }
                         })
                     });

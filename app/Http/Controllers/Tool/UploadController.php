@@ -14,11 +14,11 @@ class UploadController extends Controller
 	public function video(Request $request, UploadHandler $uploader)
 	{
 		$res = $uploader->verify($request->file('file'),100,'video');
-		
 		if($res['code'] != 0){
 			return layui_json(200,$res['msg']);
 		}
 		$path = $request->file('file')->store('drama','drama');
+//		dd($path);
 		if($path){
 			$data['file_path'] = Storage::disk('drama')->url($path);
 			return layui_json(200,'上传成功',$data);
