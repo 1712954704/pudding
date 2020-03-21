@@ -93,7 +93,7 @@ class DramaController extends BaseController
 	public function destroy($id){
 		$data = Video::query()->find($id);
 		$file = pathinfo($data->address);
-		$res = Storage::disk('drama')->delete('drama/'.$file['filename']);
+		$res = Storage::disk('drama')->delete('drama/'.$file['basename']);
 		if ($res){
 			return layui_json(200,'删除成功');
 		}
