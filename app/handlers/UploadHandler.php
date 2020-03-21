@@ -6,8 +6,55 @@
 	class UploadHandler
 	{
 		// 只允许以下后缀名的图片文件上传
-		protected $allowed_ext = ["png", "jpg", "gif", 'jpeg','bmp'];
+		protected $photo = ["png", "jpg", "gif", 'jpeg','bmp'];
+		protected $video = ["mp4"];
+		protected $byte = 1024 * 1024;
 		
+		/**
+		 * 文件上传验证
+		 * file 文件
+		 * size 大小
+		 * type 类型
+		 * return array   code 0 正常 1 文件大小验证不通过  2 文件类型验证不通过
+		*/
+		public function verify($file, $size ,$type =''){
+		
+//			dd($file->extension());  获取文件后缀名
+//			dd($file->getClientOriginalExtension());
+			$data = [
+				'code' => 0,
+				'msg'  => '',
+			];
+			//限制上传文件的大小
+			if ($file->getClientSize() >= ($size * $this->byte)) {
+				$data['code'] = 1;
+				$data['msg'] = '请上传'.$size.'兆以内的文件';
+				return $data;
+			}
+			//文件类型验证
+			switch ($type){
+				case 'video' :
+					if(!in_array(strtolower($file->extension()),$this->video)){
+						$data['code'] = 2;
+						$data['msg'] = '上传文件格式不正确';
+						return $data;
+					};
+					break;
+				case 'photo' :
+					if(!in_array(strtolower($file->extension()),$this->photo)){
+						$data['code'] = 2;
+						$data['msg'] = '上传文件格式不正确';
+						return $data;
+					};
+					break;
+				default:
+					$data['code'] = 2;
+					$data['msg'] = 'type不能为空';
+					return $data;
+			}
+			return $data;
+		}
+
 		public function save($file, $folder, $file_prefix,$type='')
 		{
 			$file_size = 2097152;//固定文件大小2MB
@@ -32,7 +79,7 @@
 			$filename = $file_prefix . '_' . time() . '_' . Str::random(10) . '.' . $extension;
 			
 			// 如果上传的不是图片将终止操作
-//			if (!in_array($extension, $this->allowed_ext)) {
+//			if (!in_array($extension, $this->$photo)) {
 //				return layui_json(404, '上传文件格式不正确!');
 //			}
 			

@@ -63,9 +63,11 @@
                 , done: function (res) {
                     //如果上传失败
                     if (res.code = 200) {
-                        layer.msg('上传成功');
+                        layer.msg(res.msg);
+                        $("#site").attr("value",res.data.file_path);
+                    }else{
+                        layer.msg(res.msg);
                     }
-                    $("#site").attr("value",res.file_path);
                 }
                 , error: function () {
                     //演示失败状态，并实现重传
