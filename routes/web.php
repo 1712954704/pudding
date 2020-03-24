@@ -28,6 +28,7 @@ Route::get('/particle',function (){
 Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
     Route::get('back','LoginController@Index');                 // 后台登录页
     Route::post('register','LoginController@register');         // 后台登录验证
+    Route::get('loginout','LoginController@loginout');         // 后台登出
     Route::group(['middleware'=>'AuthUsers'],function(){
         Route::get('entire','LoginController@entire');          // 后台首页
         Route::get('fiction','FictionController@index');        // 后台小说首页
@@ -38,15 +39,16 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
 		Route::resource('drama', 'DramaController');              //后台番剧资源路由
 		Route::post('drama/{id}', 'DramaController@infor');       //soultable重载数据番剧
 		Route::get('play', 'DramaController@play');               //視頻播放
-        Route::get('infor', function (){
-            return view('admin.table.infor');
-        });            //后台表格资源路由测试
-    });
+		Route::resource('article','ArticleController');			// 文章资源路由
+		Route::post('article/{id}', 'ArticleController@infor');     //soultable重载数据文章
+	});
 });
 
 
 Route::group(['namespace'=>'Tool','prefix'=>'tool'],function(){
 	Route::post('uploadVideo', 'UploadController@video');			// 视频上传
+	Route::post('uploadRichImg', 'UploadController@richImage');	// 图片上传
+	Route::post('delFile', 'UploadController@delFile');	       // 文件删除
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

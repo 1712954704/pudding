@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Storage;
 class DramaController extends BaseController
 {
     /**
-	 * 番剧首页
+	 * 视频首页
     */
     public function index(){
 		return view('admin.drama.index');
 	}
 	
 	/**
-	 * 视频添加
+	 * 视频添加页
 	*/
 	public function  create(){
 		return view('admin.drama.append');

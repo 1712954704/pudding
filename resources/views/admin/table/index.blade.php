@@ -7,6 +7,7 @@
 @stop
 @section('style')
     <style>
+        body{overflow-y: scroll;}  /* 禁止刷新后出现横向滚动条 */
         .layui-table-view .layui-table {width:100%}
         .layui-table-cell {
             height: 50px;
@@ -170,12 +171,36 @@
             background: #fff;
             margin: 10px 0 0 0;
         }
+
+        /*我的导航*/
+        .navigator{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            width: 90%;
+            background: #fff;
+            box-shadow: 0 0 0 1px #eee;
+            border-radius: 0 0 4px 4px;
+            padding: 16px 0px;
+        }
+        .navigator a{
+            font-size: 20px;
+            /* margin-right: 4px; */
+            vertical-align: middle;
+        }
     </style>
 
 @stop
 @section('content')
     <div class="body" id="table">
         <div class="self_inner">
+        </div>
+        <div class="navigator">
+            <a href="/admin/table">表格</a>
+            <a href="/admin/drama">视频</a>
+            <a href="/admin/article">文章</a>
+            <a href="">漫画</a>
+            <a href="/admin/drama">标签</a>
         </div>
         {{--表格内容--}}
         <div class="table_content">
@@ -196,7 +221,7 @@
                     <div class="rgt_default">
                         <a href="" class="rgt_default_name">默认收藏夹</a>
                         <div class="rgt_default_infor">
-                            <span class="infor_name">创建者:徐振</span>
+                            <span class="infor_name">创建者:{{\Illuminate\Support\Facades\Auth::guard('user')->user()->name}}</span>
                             <span>0个内容 &nbsp; · &nbsp; 公开</span>
                             <div id="jump" class="rgt_detail">
                                 <span href="">添加</span>
@@ -242,7 +267,7 @@
             table.render({
                 elem: '#myTable'
                 ,id: 'myTable'
-                                ,url: "{{url('admin/table/{table}')}}" //数据接口
+                ,url: "{{url('admin/table/{table}')}}" //数据接口
                 // ,url: 'https://soultable.saodiyang.com/back/poetry/dataGrid'
                 ,toolbar: '#toolbar'
                 // ,toolbar: true

@@ -64,7 +64,7 @@
                     //如果上传失败
                     if (res.code = 200) {
                         layer.msg(res.msg);
-                        $("#site").attr("value",res.data.file_path);
+                        $("#site").attr("value",res.data.src);
                     }else{
                         layer.msg(res.msg);
                     }

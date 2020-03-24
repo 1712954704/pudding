@@ -33,21 +33,21 @@
 			}
 			//文件类型验证
 			switch ($type){
-				case 'video' :
+				case 'video' : // 视频
 					if(!in_array(strtolower($file->extension()),$this->video)){
 						$data['code'] = 2;
 						$data['msg'] = '上传文件格式不正确';
 						return $data;
 					};
 					break;
-				case 'photo' :
+				case 'img' : // 图片
 					if(!in_array(strtolower($file->extension()),$this->photo)){
 						$data['code'] = 2;
 						$data['msg'] = '上传文件格式不正确';
 						return $data;
 					};
 					break;
-				default:
+				default: // 默认
 					$data['code'] = 2;
 					$data['msg'] = 'type不能为空';
 					return $data;

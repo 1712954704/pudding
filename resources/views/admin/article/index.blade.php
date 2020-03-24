@@ -224,7 +224,7 @@
                             <span class="infor_name">创建者:{{\Illuminate\Support\Facades\Auth::guard('user')->user()->name}}</span>
                             <span>0个内容 &nbsp; · &nbsp; 公开</span>
                             <div id="jump" class="rgt_detail">
-                                <span href="">视频添加</span>
+                                <span href="">文章添加</span>
                             </div>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
             table.render({
                 elem: '#myTable'
                 ,id: 'myTable'
-                ,url: "{{url('admin/drama/{drama}')}}" //数据接口
+                ,url: "{{url('admin/article/{article}')}}" //数据接口
                 // ,url: 'https://soultable.saodiyang.com/back/poetry/dataGrid'
                 ,toolbar: '#toolbar'
                 // ,toolbar: true
@@ -286,8 +286,8 @@
                     }}
                 ,totalRow: true
                 ,cols: [[
-                    {field: 'title', title: '名称',width:'20%', sort: true, filter: true, totalRowText: '合计'},
-                    {field: 'address', title: '地址',width:'40%', event: 'play', sort: true,filter: true,totalRow: true},
+                    {field: 'title', title: '标题',width:'20%', sort: true, filter: true, totalRowText: '合计'},
+                    {field: 'content', title: '内容',width:'40%', sort: true,filter: true,totalRow: true},
                     // {field: 'detail', width:'20%',title: '描述',filter: true, },
                     // {field: 'content', title: '内容',},
                     {field: 'created_at',width:'10%', title: '录入时间', filter: true,},
@@ -303,23 +303,12 @@
             //监听单元格事件
             table.on('tool(test)', function(obj) {
                 var data = obj.data;
-                if (obj.event === 'play') {
-                    var json=eval('('+JSON.stringify(data)+')');//String转json
-                    layer.open({
-                        type: 2,
-                        title: '视频播放',
-                        content: "/admin/play"+"?address="+json['address'],
-                        maxmin: true, //开启最大化最小化按钮
-                        area: ['800px', '600px'],
-                        // resize: false,
-                        offset: 'auto'
-                    });
-                }else if(obj.event == 'del'){
+                if(obj.event == 'del'){
                     layer.confirm('删除后不可恢复，确认删除吗？', function(index){
                         var json=eval('('+JSON.stringify(data)+')');//String转json
                         $.ajax({
                             // url:'/admin/staff_del',
-                            url: "{{url('/admin/drama')}}"+'/'+json['id'],
+                            url: "{{url('/admin/article')}}"+'/'+json['id'],
                             method:'delete',
                             data:{"id":json['id']},
                             dataType:'JSON',
@@ -347,8 +336,8 @@
             $(document).on('click', '#jump', function () {
                 layer.open({
                     type: 2,
-                    title: '视频添加',
-                    content: '/admin/drama/create',
+                    title: '文章添加',
+                    content: '/admin/article/create',
                     maxmin: true, //开启最大化最小化按钮
                     area: ['800px', '600px'],
                     resize: false

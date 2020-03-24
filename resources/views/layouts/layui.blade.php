@@ -14,6 +14,7 @@
     <script src="{{ asset('layui/layui.js') }}"></script>
     <script src="{{ asset('js/vue.js') }}"></script>
     <script  src="{{ asset('js/jquery-3.0.0.js') }}" charset="utf-8"></script>
+    <script  src="{{ asset('ace/ace.js') }}" charset="utf-8"></script>
 
     <title>@yield('title', 'layui')</title>
     @section('resource')
@@ -24,7 +25,6 @@
 <body>
 @section('content')
 @show
-<script type=“text/html” src="{{ asset('layui/layui.js') }}" charset="utf-8"></script>
 @section('js')
 @show
 </body>

@@ -55,10 +55,10 @@ return [
             'visibility' => 'public',
         ],
 		
-		'drama' => [
+		'drama' => [				// 驱动名
 			'driver' => 'local',   // 驱动设置 本地
 			'root' => storage_path('app/public'),   // 指定的默认路径
-			'url' => env('APP_URL').'/storage',
+			'url' => env('APP_URL').'/storage',	 // 指定url路径
 			'visibility' => 'public',      // 文件可以声明为 public 或 private。如果一个文件被声明为 public，意味着其他人可以访问
 			'permissions' => [
 				'file' => [

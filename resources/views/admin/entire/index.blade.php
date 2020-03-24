@@ -89,6 +89,31 @@
             border-radius: 50%;
             margin: 6px 0 0 0;
         }
+
+        /*我的*/
+        .mine{
+            color: #212121;
+            text-shadow: none;
+            text-decoration: none;
+            margin: auto;
+            white-space: nowrap;
+            font-size: 16px;
+            position: relative;
+        }
+        .mine_detail{
+            display: none;
+            position: absolute;
+            /*display: flex;*/
+            flex-direction: column;
+            background: #fff;
+            box-shadow: 0 0 0 1px #eee;
+            border-radius: 0 0 4px 4px;
+            padding: 0 20px;
+            left: -20px;
+        }
+        .mine:hover .mine_detail{
+            display: flex;
+        }
     </style>
     @section('style')
     @show
@@ -100,7 +125,7 @@
         <a href="">游戏</a>
         <a href="/admin/fiction">小说</a>
         <a href="">漫画</a>
-        <a href="/admin/drama">番剧</a>
+        <a href="">番剧</a>
     </div>
     <div class="nav_search">
         <div id="nav_fromsearch">
@@ -111,10 +136,14 @@
         </div>
     </div>
     <div class="top_interval">
-        <a>
-            <img class="head_img" src="/imgs/home_index/head.webp" alt="">
-        </a>
-        <a href="/admin/table">表格</a>
+        <div class="mine">
+            <img v-on:click="myself" class="head_img" src="/imgs/home_index/head.webp" alt="">
+            <div class="mine_detail">
+                <span style="font-size: 20px;">{{\Illuminate\Support\Facades\Auth::guard('user')->user()->name}}</span>
+                <a href="#" v-on:click="loginout">退出登录</a>
+            </div>
+        </div>
+        <a href="">权限</a>
         <a href="">消息</a>
         <a href="">动态</a>
         <a href="">收藏</a>
@@ -124,6 +153,39 @@
 @section('content')
 @show
 <script type=“text/html” src="{{ asset('layui/layui.js') }}" charset="utf-8"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var Vue = new Vue({
+        el : "#top",
+        data(){
+            return {
+
+            };
+        },
+        methods:{
+            loginout(){
+                axios({
+                    method: 'get',
+                    url: '/admin/loginout',
+                    data: {
+                    },
+                    headers:{ '_token':'{{csrf_token()}}'},
+                }).then(function(data) {
+                    if(data.data.code == 200){
+                        window.location.href="/admin/back";
+                    }else{
+                        alert(data.data.msg);
+                    }
+                }).catch(function (error) {
+                    // console.log('失败');
+                });
+            },
+            myself(){
+                window.location.href="/admin/drama";
+            },
+        }
+    });
+</script>
 @section('js')
 @show
 </body>

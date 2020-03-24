@@ -19,7 +19,7 @@ class LoginController extends BaseController
 
 
     /**
-     * 登录
+     * 登录验证
     */
     public function register(Request $request){
         $username = $request->user;
@@ -35,6 +35,17 @@ class LoginController extends BaseController
         }
         return layui_json(201,'用户名或密码错误');
     }
+    
+    /**
+	 * 登出
+    */
+    public function loginout(){
+    	$logout = $this->guard()->logout();
+		if(!$logout){
+			return layui_json();
+		}
+		return layui_json(201,'登出失败');
+	}
 
     /**
      * 重写验证时使用的用户名字段.
