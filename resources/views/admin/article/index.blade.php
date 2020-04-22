@@ -199,8 +199,9 @@
             <a href="/admin/table">表格</a>
             <a href="/admin/drama">视频</a>
             <a href="/admin/article">文章</a>
-            <a href="">漫画</a>
-            <a href="/admin/drama">标签</a>
+            <a href="#">漫画</a>
+            <a href="/admin/label">标签</a>
+            <a href="/admin/convert">转换</a>
         </div>
         {{--表格内容--}}
         <div class="table_content">

@@ -41,6 +41,10 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
 		Route::get('play', 'DramaController@play');               //視頻播放
 		Route::resource('article','ArticleController');			// 文章资源路由
 		Route::post('article/{id}', 'ArticleController@infor');     //soultable重载数据文章
+		Route::resource('label','LabelController');			  // 标签资源路由
+		Route::post('label/{id}', 'LabelController@infor');     //soultable重载数据标签
+		Route::resource('convert', 'ConvertController');     		// word转txt测试
+		Route::post('analysis', 'ConvertController@analysis');    // word上传并解析
 	});
 });
 

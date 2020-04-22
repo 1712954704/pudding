@@ -8,6 +8,7 @@
 		// 只允许以下后缀名的图片文件上传
 		protected $photo = ["png", "jpg", "gif", 'jpeg','bmp'];
 		protected $video = ["mp4"];
+		protected $word = ["docx"];
 		protected $byte = 1024 * 1024;
 		
 		/**
@@ -42,6 +43,13 @@
 					break;
 				case 'img' : // 图片
 					if(!in_array(strtolower($file->extension()),$this->photo)){
+						$data['code'] = 2;
+						$data['msg'] = '上传文件格式不正确';
+						return $data;
+					};
+					break;
+				case 'word' : // 图片
+					if(!in_array(strtolower($file->extension()),$this->word)){
 						$data['code'] = 2;
 						$data['msg'] = '上传文件格式不正确';
 						return $data;

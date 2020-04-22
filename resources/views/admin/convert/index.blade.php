@@ -1,5 +1,5 @@
 @extends("admin.entire.index")
-@section('title','表格')
+@section('title','番剧')
 @section('resource')
     <script src="/js/ali/detail.js"></script>
     <link rel="stylesheet" href="{{ asset('layui/extend/ext/animate.min.css') }}"/>
@@ -171,6 +171,14 @@
             background: #fff;
             margin: 10px 0 0 0;
         }
+        .convert{
+            display: flex;
+            flex-direction: row;
+        }
+        #download{
+            margin-left: 15px;
+            display: none;
+        }
 
         /*我的导航*/
         .navigator{
@@ -199,8 +207,9 @@
             <a href="/admin/table">表格</a>
             <a href="/admin/drama">视频</a>
             <a href="/admin/article">文章</a>
-            <a href="">漫画</a>
+            <a href="#">漫画</a>
             <a href="/admin/label">标签</a>
+            <a href="/admin/convert">转换</a>
         </div>
         {{--表格内容--}}
         <div class="table_content">
@@ -223,18 +232,21 @@
                         <div class="rgt_default_infor">
                             <span class="infor_name">创建者:{{\Illuminate\Support\Facades\Auth::guard('user')->user()->name}}</span>
                             <span>0个内容 &nbsp; · &nbsp; 公开</span>
-                            <div id="jump" class="rgt_detail">
-                                <span href="">添加</span>
+                            {{--<div id="jump" class="rgt_detail">--}}
+                                {{--<span href="">word上传</span>--}}
+                            <div class="convert">
+                                <button type="button" class="layui-btn" id="video" lay-type="video">
+                                    <i class="layui-icon">&#xe67c;</i>word上传
+                                </button>
+                                <button type="button" class="layui-btn" id="download">
+                                    {{--<a href="http://demo.xx.cn/demo.zip" class="layui-icon">&#xe67c;</a>txt下载--}}
+                                </button>
                             </div>
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="table_body">
-        <div class="table_detail" id="table_id">
-            <table id="myTable" ></table>
         </div>
     </div>
 @stop
@@ -243,101 +255,64 @@
         <div><button class="layui-btn layui-btn-sm" lay-event="clearFilter">清除所有筛选条件</button></div>
     </script>
     <script type="text/html" id="bar">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        {{--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>--}}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     <script>
-        {{--layui--}}
-        {{--自定义模块--}}
-        layui.config({
-            base: '/layui/extend/ext/',   // 模块目录
-            version: 'v1.3.4'
-        }).extend({                         // 模块别名
-            soulTable: 'soulTable'
-            // soulTable: 'tableChild'
-        });
-
-        layui.use(['layer', 'form', 'table','soulTable'], function () {
-            var table = layui.table,
-                layer = layui.layer,
-                form = layui.form;
-            soulTable = layui.soulTable;
-            $ = layui.$;
-
-            table.render({
-                elem: '#myTable'
-                ,id: 'myTable'
-                ,url: "{{url('admin/table/{table}')}}" //数据接口
-                // ,url: 'https://soultable.saodiyang.com/back/poetry/dataGrid'
-                ,toolbar: '#toolbar'
-                // ,toolbar: true
-                ,totalRow: true
-                ,limit: 20
-                ,page: true
-                ,rowDrag: {/*trigger: 'row',*/ done: function(obj) {
-                        // 完成时（松开时）触发
-                        // 如果拖动前和拖动后无变化，则不会触发此方法
-                        console.log(obj.row) // 当前行数据
-                        console.log(obj.cache) // 改动后全表数据
-                        console.log(obj.oldIndex) // 原来的数据索引
-                        console.log(obj.newIndex) // 改动后数据索引
-                    }}
-                ,totalRow: true
-                ,cols: [[
-
-                    // {type: 'checkbox', fixed: 'left'},
-                    // {field: 'title', title: '诗词', width: '10%', sort: true, filter: true},
-                    // {field: 'dynasty', title: '朝代', width: '10%', sort: true, filter: true},
-                    // {field: 'author', title: '作者', width: '10%' , filter: true},
-                    // {field: 'content', title: '内容', width: '10%', filter: true},
-                    // {field: 'type', title: '类型', width: '10%',  filter: {split:','}, sort:true},
-                    // {field: 'heat', title: '点赞数', width: '10%',  filter: true, fixed: 'right', sort:true, excel:{cellType: 'n'}},
-                    // {field: 'createTime', title: '录入时间', width: '10%', fixed: 'right', filter: {type: 'date[yyyy-MM-dd HH:mm:ss]'}, sort:true},
-                    // {title: '操作', width: '30%', fixed: 'right', templet: '#bar'}
-                    // {type: 'radio', title: '##', fixed: 'left'},
-                    // {type: 'checkbox', title: '##', fixed: 'left'},
-                    // {field: 'title', title: '名称', fixed: 'left', totalRowText: '合计',filter: true},
-                    {field: 'title', title: '名称',width:'20%', sort: true, filter: true, totalRowText: '合计'},
-                    {field: 'num', title: '数量',width:'20%', sort: true,filter: true,totalRow: true},
-                    {field: 'detail', width:'20%',title: '描述',filter: true, },
-                    // {field: 'content', title: '内容',},
-                    {field: 'created_at',width:'10%', title: '录入时间', filter: true,},
-                    {field: 'updated_at',width:'10%', title: '更新时间', filter: true,},
-                    {title: '操作', width: '20%', fixed: 'right', templet: '#bar'},
-                ]]
-                ,done: function (res, curr, count) {
-                    soulTable.render(this);
-                    AutoTableHeight();
+        // 表单提交
+        layui.use(['form','upload','element'], function(){
+            var upload = layui.upload,
+                element = layui.element,
+                layer = layui.layer;
+            //拖拽上传
+            var uploadInst = upload.render({
+                elem: '#video'
+                ,url: "{{url('/admin/analysis')}}"
+                // , size: 2048
+                ,method:'post'
+                ,accept: 'file' //所有文件
+                // ,ext: 'zip|rar'
+                // ,type: 'file'
+                ,headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                }
+                , before: function (obj) {
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#demo1').attr('src', result); //图片链接（base64）
+                    });
+                }
+                , done: function (res) {
+                    //如果上传失败
+                    if (res.code = 200) {
+                        layer.msg('成功');
+                        // $("#site").attr("value",res.data.src);
+                        $("#download").css("display",'inline-block');
+                        $("#download").append(
+                            '<a href="'+res.data.src+'" download="转换测试" class="layui-icon">&#xe67c;</a>txt下载\n'
+                        );
+                    }else{
+                        layer.msg(res.msg);
+                    }
+                }
+                , error: function () {
+                    //演示失败状态，并实现重传
+                    var demo = $('#demo');
+                    demo.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    demo.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
                 }
             });
-
-            $(document).on('click', '#jump', function () {
-                layer.open({
-                    type: 2,
-                    title: '表格添加',
-                    content: '/admin/table/create',
-                    maxmin: true, //开启最大化最小化按钮
-                    area: ['800px', '600px'],
-                    resize: false
-                });
-            });
+            element.init();
         });
 
+        //表格宽高调整
         function AutoTableHeight()
         {
             var dev_obj = document.getElementById('table_id'); //table的父div
-
             var layuitable_main = dev_obj.getElementsByClassName("layui-table-main"); //在父div中找 layui-table-main 属性所在标签
-            // if (layuitable_main != null && layuitable_main.length > 0) {
-                layuitable_main[0].style.height = '100%';
-                // console.log(layuitable_main);
-            // }
-
-            // var layuitable = dev_obj.getElementsByClassName("layui-form"); //在父div中找 layui-form 属性所在标签
-            // if (layuitable != null && layuitable.length > 0) {
-            //     layuitable[0].style.height = '100%';
-            //     console.log(layuitable);
-            // }
+            layuitable_main[0].style.height = '100%';
         }
     </script>
 @stop

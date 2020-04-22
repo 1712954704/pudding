@@ -1,5 +1,5 @@
 @extends("admin.entire.index")
-@section('title','表格')
+@section('title','标签')
 @section('resource')
     <script src="/js/ali/detail.js"></script>
     <link rel="stylesheet" href="{{ asset('layui/extend/ext/animate.min.css') }}"/>
@@ -199,7 +199,7 @@
             <a href="/admin/table">表格</a>
             <a href="/admin/drama">视频</a>
             <a href="/admin/article">文章</a>
-            <a href="">漫画</a>
+            <a href="#">漫画</a>
             <a href="/admin/label">标签</a>
         </div>
         {{--表格内容--}}
@@ -224,7 +224,7 @@
                             <span class="infor_name">创建者:{{\Illuminate\Support\Facades\Auth::guard('user')->user()->name}}</span>
                             <span>0个内容 &nbsp; · &nbsp; 公开</span>
                             <div id="jump" class="rgt_detail">
-                                <span href="">添加</span>
+                                <span href="">标签添加</span>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
     </div>
     <div class="table_body">
         <div class="table_detail" id="table_id">
-            <table id="myTable" ></table>
+            <table id="myTable" lay-filter="test"></table>
         </div>
     </div>
 @stop
@@ -243,12 +243,13 @@
         <div><button class="layui-btn layui-btn-sm" lay-event="clearFilter">清除所有筛选条件</button></div>
     </script>
     <script type="text/html" id="bar">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        {{--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>--}}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     <script>
         {{--layui--}}
         {{--自定义模块--}}
+        // 表格
         layui.config({
             base: '/layui/extend/ext/',   // 模块目录
             version: 'v1.3.4'
@@ -256,6 +257,7 @@
             soulTable: 'soulTable'
             // soulTable: 'tableChild'
         });
+
 
         layui.use(['layer', 'form', 'table','soulTable'], function () {
             var table = layui.table,
@@ -267,7 +269,7 @@
             table.render({
                 elem: '#myTable'
                 ,id: 'myTable'
-                ,url: "{{url('admin/table/{table}')}}" //数据接口
+                ,url: "{{url('admin/label/{label}')}}" //数据接口
                 // ,url: 'https://soultable.saodiyang.com/back/poetry/dataGrid'
                 ,toolbar: '#toolbar'
                 // ,toolbar: true
@@ -284,22 +286,9 @@
                     }}
                 ,totalRow: true
                 ,cols: [[
-
-                    // {type: 'checkbox', fixed: 'left'},
-                    // {field: 'title', title: '诗词', width: '10%', sort: true, filter: true},
-                    // {field: 'dynasty', title: '朝代', width: '10%', sort: true, filter: true},
-                    // {field: 'author', title: '作者', width: '10%' , filter: true},
-                    // {field: 'content', title: '内容', width: '10%', filter: true},
-                    // {field: 'type', title: '类型', width: '10%',  filter: {split:','}, sort:true},
-                    // {field: 'heat', title: '点赞数', width: '10%',  filter: true, fixed: 'right', sort:true, excel:{cellType: 'n'}},
-                    // {field: 'createTime', title: '录入时间', width: '10%', fixed: 'right', filter: {type: 'date[yyyy-MM-dd HH:mm:ss]'}, sort:true},
-                    // {title: '操作', width: '30%', fixed: 'right', templet: '#bar'}
-                    // {type: 'radio', title: '##', fixed: 'left'},
-                    // {type: 'checkbox', title: '##', fixed: 'left'},
-                    // {field: 'title', title: '名称', fixed: 'left', totalRowText: '合计',filter: true},
-                    {field: 'title', title: '名称',width:'20%', sort: true, filter: true, totalRowText: '合计'},
-                    {field: 'num', title: '数量',width:'20%', sort: true,filter: true,totalRow: true},
-                    {field: 'detail', width:'20%',title: '描述',filter: true, },
+                    {field: 'title', title: '标题',width:'20%', sort: true, filter: true, totalRowText: '合计'},
+                    {field: 'content', title: '内容',width:'40%', sort: true,filter: true,totalRow: true},
+                    // {field: 'detail', width:'20%',title: '描述',filter: true, },
                     // {field: 'content', title: '内容',},
                     {field: 'created_at',width:'10%', title: '录入时间', filter: true,},
                     {field: 'updated_at',width:'10%', title: '更新时间', filter: true,},
@@ -311,11 +300,44 @@
                 }
             });
 
+            //监听单元格事件
+            table.on('tool(test)', function(obj) {
+                var data = obj.data;
+                if(obj.event == 'del'){
+                    layer.confirm('删除后不可恢复，确认删除吗？', function(index){
+                        var json=eval('('+JSON.stringify(data)+')');//String转json
+                        $.ajax({
+                            // url:'/admin/staff_del',
+                            url: "{{url('/admin/label')}}"+'/'+json['id'],
+                            method:'delete',
+                            data:{"id":json['id']},
+                            dataType:'JSON',
+                            async : true,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success:function(data){
+                                if(data.code == 200){
+                                    layer.msg(data.msg);
+                                    obj.del();
+                                    layer.close(index);
+                                }else if(data.code = 201){
+                                    layer.msg(data.msg);
+                                }
+                            },
+                            error:function (data) {
+                                layer.msg('网络延迟,请重试');
+                            }
+                        })
+                    });
+                }
+            });
+
             $(document).on('click', '#jump', function () {
                 layer.open({
                     type: 2,
-                    title: '表格添加',
-                    content: '/admin/table/create',
+                    title: '文章添加',
+                    content: '/admin/label/create',
                     maxmin: true, //开启最大化最小化按钮
                     area: ['800px', '600px'],
                     resize: false
@@ -323,14 +345,15 @@
             });
         });
 
+        //表格宽高调整
         function AutoTableHeight()
         {
             var dev_obj = document.getElementById('table_id'); //table的父div
 
             var layuitable_main = dev_obj.getElementsByClassName("layui-table-main"); //在父div中找 layui-table-main 属性所在标签
             // if (layuitable_main != null && layuitable_main.length > 0) {
-                layuitable_main[0].style.height = '100%';
-                // console.log(layuitable_main);
+            layuitable_main[0].style.height = '100%';
+            // console.log(layuitable_main);
             // }
 
             // var layuitable = dev_obj.getElementsByClassName("layui-form"); //在父div中找 layui-form 属性所在标签
