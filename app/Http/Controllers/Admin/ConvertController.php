@@ -47,7 +47,7 @@ class ConvertController extends Controller
 			$myfile = fopen("hello.txt", "w") or die("Unable to open file!");
 			fwrite($myfile, $txt);
 			fclose($myfile);
-			$data['src'] = 'http://www.pudding.test/hello.txt';
+			$data['src'] = 'http://www.xioabuding.top/hello.txt';
 			return layui_json(200,'上传成功',$data);
 		}else{
 			return layui_json(200,'上传失败');
