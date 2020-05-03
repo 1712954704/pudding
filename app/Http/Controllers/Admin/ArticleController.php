@@ -47,8 +47,9 @@ class ArticleController extends BaseController
 	 * 表格展示
 	 */
 	public function infor(Request $request){
-		Log::debug('测试log信息');
-		Log::write('测试log信息');
+//		Log::debug('测试log信息');
+		dd(phpinfo());
+//		Log::write('测试log信息');
 		$res = Article::where('user_id',$this->guard()->id())->get()->toArray();
 		$data['title'] = array_column($res, 'title');
 		$data['address'] = array_column($res, 'num');
