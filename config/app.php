@@ -122,6 +122,14 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+	
+	// 按日期切割日志
+	'log' => 'daily',
+	// 日志最大数
+	'log_max_files' => 30,
+	// 日志文件名
+//	'log_name' => 'pudding.log.'.date('Ymd',time()),
+	'log_name' => 'pudding',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,5 +235,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];

@@ -7,7 +7,8 @@ use App\Http\Requests\Admin\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Log;
+use Monolog\Handler\StreamHandler;
 class ArticleController extends BaseController
 {
     /**
@@ -46,6 +47,8 @@ class ArticleController extends BaseController
 	 * 表格展示
 	 */
 	public function infor(Request $request){
+		Log::debug('测试log信息');
+		Log::write('测试log信息');
 		$res = Article::where('user_id',$this->guard()->id())->get()->toArray();
 		$data['title'] = array_column($res, 'title');
 		$data['address'] = array_column($res, 'num');
@@ -79,6 +82,10 @@ class ArticleController extends BaseController
 	 */
 	public function destroy($id){
 		$res = Article::query()->where('id',$id)->delete();
+		// 恢复文章隔离
+//		Article::withTrashed()
+//			->where('id', 1)
+//			->restore();
 		if ($res){
 			return layui_json(200,'删除成功');
 		}
