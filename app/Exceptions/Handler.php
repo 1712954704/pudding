@@ -61,7 +61,9 @@ class Handler extends ExceptionHandler
                     return response()->json($result);
                 }
             }
-        }
+        }else if ($exception instanceof \App\Exceptions\CustomException)  {
+			return $exception->render($request);
+		}
         return parent::render($request, $exception);
     }
 }

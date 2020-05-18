@@ -15,9 +15,12 @@ class ArticleController extends BaseController
 	 * 文章首页
     */
     public function index(){
+		// 出错了，你可以抛出自定义的异常 CustomException
+//		throw new \App\Exceptions\CustomException('Something Went Wrong.');
+
     	return view('admin.article.index');
 	}
-	
+
 	/**
 	 * 表格展示
 	 */
@@ -25,9 +28,9 @@ class ArticleController extends BaseController
 		$limit = $request->limit?$request->limit:10;
 		$page = $request->page?$request->page:1;
 		$offset = ($request->page - 1) * $limit;
-		
+
 		$filterSos = $request->filterSos;
-		
+
 		if($filterSos){
 			$sql = proSearchParam(json_decode($filterSos, true), "", true);
 			if($sql){
@@ -42,13 +45,13 @@ class ArticleController extends BaseController
 		$count = Article::where('user_id', $this->guard()->id())->count();
 		return layui_json(0,'success',$data,$count);
 	}
-	
+
 	/**
 	 * 表格展示
 	 */
 	public function infor(Request $request){
 //		Log::debug('测试log信息');
-		dd(phpinfo());
+//		dd(env('APP_ENV'));
 //		Log::write('测试log信息');
 		$res = Article::where('user_id',$this->guard()->id())->get()->toArray();
 		$data['title'] = array_column($res, 'title');
@@ -57,14 +60,14 @@ class ArticleController extends BaseController
 		$data['updated_at'] = array_column($res, 'updated_at');
 		return json_encode($data);
 	}
-	
+
 	/**
 	 * 文章添加页
 	*/
 	public function create(){
 		return view('admin.article.append');
 	}
-	
+
 	/**
 	 * 文章添加
 	*/
@@ -77,13 +80,13 @@ class ArticleController extends BaseController
 		}
 		return layui_json(416);
 	}
-	
+
 	/**
 	 * 文章删除
 	 */
 	public function destroy($id){
 		$res = Article::query()->where('id',$id)->delete();
-		// 恢复文章隔离
+//		 恢复文章隔离
 //		Article::withTrashed()
 //			->where('id', 1)
 //			->restore();

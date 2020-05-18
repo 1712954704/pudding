@@ -32,12 +32,12 @@ class GoogleControler extends Controller
                 'EAAIISaX3vZBgBABHJR4uZCaQhl2hAS4OXx695wamA0ZBLxDPGYsjKBZCMpqVqWZC177mJak79KqFsyPQWo4cssZBKJL3ZAU9O6zAQhGm4bdb1PVvJ0fstYYB5jqTlQWqVUkGEuQ3klZBq8cSK2rZBuu4w8GMYSfGtV12W8dgRMmi4a4qDU8eNC0g0bsuPZCt0ZC5I4ZD'
             );
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            // When Graph returns an error
-            echo 'Graph returned an error: ' . $e->getMessage();
+            // When Graph returns an errors
+            echo 'Graph returned an errors: ' . $e->getMessage();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             // When validation fails or other local issues
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            echo 'Facebook SDK returned an errors: ' . $e->getMessage();
             exit;
         }
         $me = $response->getGraphUser();

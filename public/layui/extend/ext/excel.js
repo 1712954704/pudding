@@ -3864,8 +3864,8 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
         opt.windowBits += 16;
       }
 
-      this.err    = 0;      // error code, if happens (0 = Z_OK)
-      this.msg    = '';     // error message
+      this.err    = 0;      // errors code, if happens (0 = Z_OK)
+      this.msg    = '';     // errors message
       this.ended  = false;  // used to avoid multiple onEnd() calls
       this.chunks = [];     // chunks of compressed data
 
@@ -3902,7 +3902,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
      * mode Z_FINISH (or `true`). That flush internal pending buffers and call
      * [[Deflate#onEnd]].
      *
-     * On fail call [[Deflate#onEnd]] with error code and return false.
+     * On fail call [[Deflate#onEnd]] with errors code and return false.
      *
      * We strongly recommend to use `Uint8Array` on input for best speed (output
      * array format is detected automatically). Also, don't skip last param and always
@@ -3992,7 +3992,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
      *   other if not.
      *
      * Called once after you tell deflate that input stream complete
-     * or error happenned. By default - join collected chunks,
+     * or errors happenned. By default - join collected chunks,
      * free memory and fill `results` / `err` properties.
      **/
     Deflate.prototype.onEnd = function(status) {
@@ -4211,8 +4211,8 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
         }
       }
 
-      this.err    = 0;      // error code, if happens (0 = Z_OK)
-      this.msg    = '';     // error message
+      this.err    = 0;      // errors code, if happens (0 = Z_OK)
+      this.msg    = '';     // errors message
       this.ended  = false;  // used to avoid multiple onEnd() calls
       this.chunks = [];     // chunks of compressed data
 
@@ -4244,7 +4244,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
      * mode Z_FINISH (or `true`). That flush internal pending buffers and call
      * [[Inflate#onEnd]].
      *
-     * On fail call [[Inflate#onEnd]] with error code and return false.
+     * On fail call [[Inflate#onEnd]] with errors code and return false.
      *
      * We strongly recommend to use `Uint8Array` on input for best speed (output
      * format is detected automatically). Also, don't skip last param and always
@@ -4354,7 +4354,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
      *   other if not.
      *
      * Called once after you tell inflate that input stream complete
-     * or error happenned. By default - join collected chunks,
+     * or errors happenned. By default - join collected chunks,
      * free memory and fill `results` / `err` properties.
      **/
     Inflate.prototype.onEnd = function(status) {
@@ -6479,7 +6479,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
           /* Since avail_out is 0, deflate will be called again with
        * more output space, but possibly with both pending and
        * avail_in equal to zero. There won't be anything to do,
-       * but this is not an error situation so make sure we
+       * but this is not an errors situation so make sure we
        * return OK instead of BUF_ERROR at next call of deflate:
        */
           s.last_flush = -1;
@@ -6679,13 +6679,13 @@ exports.deflateTune = deflateTune;
     'use strict';
 
 // See state defs from inflate.js
-    var BAD = 30;       /* got a data error -- remain here until reset */
+    var BAD = 30;       /* got a data errors -- remain here until reset */
     var TYPE = 12;      /* i: waiting for type bits, including last-flag bit */
 
     /*
    Decode literal, length, and distance codes and write out the resulting
    literal and match bytes until either not enough input or output is
-   available, an end-of-block is encountered, or a data error is encountered.
+   available, an end-of-block is encountered, or a data errors is encountered.
    When large enough input and output buffers are supplied to inflate(), for
    example, a 16K input buffer and a 64K output buffer, more than 95% of the
    inflate execution time is spent in this routine.
@@ -6702,7 +6702,7 @@ exports.deflateTune = deflateTune;
 
         LEN -- ran out of enough output space or enough available input
         TYPE -- reached end of block code, inflate() to interpret next block
-        BAD -- error in block data
+        BAD -- errors in block data
 
    Notes:
 
@@ -7080,8 +7080,8 @@ exports.deflateTune = deflateTune;
     var    CHECK = 27;     /* i: waiting for 32-bit check value */
     var    LENGTH = 28;    /* i: waiting for 32-bit length (gzip) */
     var    DONE = 29;      /* finished check, done -- remain here until reset */
-    var    BAD = 30;       /* got a data error -- remain here until reset */
-    var    MEM = 31;       /* got an inflate() memory error -- remain here until reset */
+    var    BAD = 30;       /* got a data errors -- remain here until reset */
+    var    MEM = 31;       /* got an inflate() memory errors -- remain here until reset */
     var    SYNC = 32;      /* looking for synchronization bytes to restart inflate() */
 
     /* ===========================================================================*/
@@ -7241,7 +7241,7 @@ exports.deflateTune = deflateTune;
       var state;
 
       if (!strm) { return Z_STREAM_ERROR; }
-      //strm.msg = Z_NULL;                 /* in case we return an error */
+      //strm.msg = Z_NULL;                 /* in case we return an errors */
 
       state = new InflateState();
 
@@ -8036,7 +8036,7 @@ exports.deflateTune = deflateTune;
                 }
               }
 
-              /* handle error breaks in while */
+              /* handle errors breaks in while */
               if (state.mode === BAD) { break; }
 
               /* check for end-of-block code (better have one) */
@@ -8419,8 +8419,8 @@ exports.deflateTune = deflateTune;
       /*
      Return from inflate(), updating the total counts and the check value.
      If there was no progress during the inflate() call, return a buffer
-     error.  Call updatewindow() to create and/or update the window state.
-     Note: a memory error from inflate() is non-recoverable.
+     errors.  Call updatewindow() to create and/or update the window state.
+     Note: a memory errors from inflate() is non-recoverable.
    */
 
       //--- RESTORE() ---
@@ -8633,7 +8633,7 @@ exports.inflateUndermine = inflateUndermine;
         table[table_index++] = (1 << 24) | (64 << 16) | 0;
 
         opts.bits = 1;
-        return 0;     /* no symbols, but wait for decoding to report error */
+        return 0;     /* no symbols, but wait for decoding to report errors */
       }
       for (min = 1; min < max; min++) {
         if (count[min] !== 0) { break; }
@@ -8840,11 +8840,11 @@ exports.inflateUndermine = inflateUndermine;
       '2':    'need dictionary',     /* Z_NEED_DICT       2  */
       '1':    'stream end',          /* Z_STREAM_END      1  */
       '0':    '',                    /* Z_OK              0  */
-      '-1':   'file error',          /* Z_ERRNO         (-1) */
-      '-2':   'stream error',        /* Z_STREAM_ERROR  (-2) */
-      '-3':   'data error',          /* Z_DATA_ERROR    (-3) */
+      '-1':   'file errors',          /* Z_ERRNO         (-1) */
+      '-2':   'stream errors',        /* Z_STREAM_ERROR  (-2) */
+      '-3':   'data errors',          /* Z_DATA_ERROR    (-3) */
       '-4':   'insufficient memory', /* Z_MEM_ERROR     (-4) */
-      '-5':   'buffer error',        /* Z_BUF_ERROR     (-5) */
+      '-5':   'buffer errors',        /* Z_BUF_ERROR     (-5) */
       '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
     };
   },{}],38:[function(_dereq_,module,exports){
@@ -10066,7 +10066,7 @@ exports.inflateUndermine = inflateUndermine;
       this.avail_out = 0;
       /* total number of bytes output so far */
       this.total_out = 0;
-      /* last error message, NULL if no error */
+      /* last errors message, NULL if no errors */
       this.msg = ''/*Z_NULL*/;
       /* not visible by applications */
       this.state = null;
@@ -13857,7 +13857,7 @@ function make_xlsx_lib(XLSX){
   var write_UncheckedRfX = write_RfX;
 
   /* [MS-XLS] 2.5.342 ; [MS-XLSB] 2.5.171 */
-  /* TODO: error checking, NaN and Infinity values are not valid Xnum */
+  /* TODO: errors checking, NaN and Infinity values are not valid Xnum */
   function parse_Xnum(data) { return data.read_shift(8, 'f'); }
   function write_Xnum(data, o) { return (o || new_buf(8)).write_shift(8, data, 'f'); }
 
@@ -15429,7 +15429,7 @@ function make_xlsx_lib(XLSX){
   function parslurp(blob, length, cb) {
     var arr = [], target = blob.l + length;
     while(blob.l < target) arr.push(cb(blob, target - blob.l));
-    if(target !== blob.l) throw new Error("Slurp error");
+    if(target !== blob.l) throw new Error("Slurp errors");
     return arr;
   }
 
@@ -15442,7 +15442,7 @@ function make_xlsx_lib(XLSX){
 
   /* --- 2.5 Structures --- */
 
-  /* [MS-XLS] 2.5.10 Bes (boolean or error) */
+  /* [MS-XLS] 2.5.10 Bes (boolean or errors) */
   function parse_Bes(blob) {
     var v = blob.read_shift(1), t = blob.read_shift(1);
     return t === 0x01 ? v : v === 0x01;
@@ -16123,7 +16123,7 @@ function make_xlsx_lib(XLSX){
     var rw = blob.read_shift(2), col = blob.read_shift(2);
     var rkrecs = [];
     while(blob.l < target) rkrecs.push(parse_RkRec(blob));
-    if(blob.l !== target) throw new Error("MulRK read error");
+    if(blob.l !== target) throw new Error("MulRK read errors");
     var lastcol = blob.read_shift(2);
     if(rkrecs.length != lastcol - col + 1) throw new Error("MulRK length mismatch");
     return {r:rw, c:col, C:lastcol, rkrec:rkrecs};
@@ -16134,7 +16134,7 @@ function make_xlsx_lib(XLSX){
     var rw = blob.read_shift(2), col = blob.read_shift(2);
     var ixfes = [];
     while(blob.l < target) ixfes.push(blob.read_shift(2));
-    if(blob.l !== target) throw new Error("MulBlank read error");
+    if(blob.l !== target) throw new Error("MulBlank read errors");
     var lastcol = blob.read_shift(2);
     if(ixfes.length != lastcol - col + 1) throw new Error("MulBlank length mismatch");
     return {r:rw, c:col, C:lastcol, ixfe:ixfes};
@@ -20593,7 +20593,7 @@ function make_xlsx_lib(XLSX){
         val[1] = parsebool(blob, 1) ? 'TRUE' : 'FALSE';
         if(biff != 12) blob.l += 7; break;
       case 0x25: /* appears to be an alias */
-      case 0x10: /* SerErr -- error */
+      case 0x10: /* SerErr -- errors */
         val[1] = BErr[blob[blob.l]];
         blob.l += ((biff == 12) ? 4 : 8); break;
       case 0x00: /* SerNil -- honestly, I'm not sure how to reproduce this */
@@ -20941,7 +20941,7 @@ function make_xlsx_lib(XLSX){
       }
     }
     length = target - blob.l;
-    /* note: this is technically an error but Excel disregards */
+    /* note: this is technically an errors but Excel disregards */
     //if(target !== blob.l && blob.l !== target - length) throw new Error(target + " != " + blob.l);
     if(length !== 0) o.push(parsenoop(blob, length));
     return o;
@@ -23276,7 +23276,7 @@ function make_xlsx_lib(XLSX){
               if(opts.cellDates) p.v = parseDate(p.v, 1);
               else { p.v = datenum(parseDate(p.v, 1)); p.t = 'n'; }
               break;
-            /* error string in .w, number in .v */
+            /* errors string in .w, number in .v */
             case 'e':
               if(!opts || opts.cellText !== false) p.w = p.v;
               p.v = RBErr[p.v]; break;
@@ -24175,7 +24175,7 @@ function make_xlsx_lib(XLSX){
         o.t = "b";
         write_record(ba, "BrtCellBool", write_BrtCellBool(cell, o));
         return;
-      case 'e': /* TODO: error */ o.t = "e"; break;
+      case 'e': /* TODO: errors */ o.t = "e"; break;
     }
     write_record(ba, "BrtCellBlank", write_BrtCellBlank(cell, o));
   }
@@ -26598,7 +26598,7 @@ function write_cc(data, name:string, opts) {
           if(!opts.enc && rt !== RecordType && (((rt&0xFF)<<8)|(rt>>8)) !== RecordType) throw new Error("rt mismatch: " + rt + "!=" + RecordType);
           if(R.r == 12){ blob.l += 10; length -= 10; } // skip FRT
         }
-        //console.error(R,blob.l,length,blob.length);
+        //console.errors(R,blob.l,length,blob.length);
         var val;
         if(R.n === 'EOF') val = R.f(blob, length, opts);
         else val = slurp(R, blob, length, opts);
@@ -29533,7 +29533,7 @@ function write_cc(data, name:string, opts) {
         case 'content-validations': break; // 9.4.4 <table:
         case 'content-validation': break; // 9.4.5 <table:
         case 'help-message': break; // 9.4.6 <table:
-        case 'error-message': break; // 9.4.7 <table:
+        case 'errors-message': break; // 9.4.7 <table:
         case 'database-ranges': break; // 9.4.14 <table:database-ranges>
         case 'filter': break; // 9.5.2 <table:filter>
         case 'filter-and': break; // 9.5.3 <table:filter-and>

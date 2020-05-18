@@ -284,12 +284,12 @@
                 }
                 , done: function (res) {
                     //如果上传失败
-                    if (res.code = 200) {
+                    if (res.code == 200) {
                         layer.msg('成功');
                         // $("#site").attr("value",res.data.src);
                         $("#download").css("display",'inline-block');
                         $("#download").append(
-                            '<a href="'+res.data.src+'" download="转换测试" class="layui-icon">&#xe67c;</a>txt下载\n'
+                            '<a href="'+res.data.src+'" download="转换测试" class="layui-icon">&#xe67c;txt下载\n</a>'
                         );
                     }else{
                         layer.msg(res.msg);

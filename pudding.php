@@ -6,7 +6,7 @@
 $requestBody = file_get_contents("php://input");
 $token = $_SERVER['HTTP_X_GITLAB_TOKEN'];
 if ($token == "") {
-    //$res_log .= "token is error".PHP_EOL;
+    //$res_log .= "token is errors".PHP_EOL;
     //file_put_contents("git-webhook-ceshi.txt", date("Y-m-d H:i:s"), FILE_APPEND);//追加写入
     //file_put_contents("git-webhook-ceshi.txt", $res_log, FILE_APPEND);//追加写入
 

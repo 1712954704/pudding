@@ -206,14 +206,14 @@ layui.define('jquery', function(exports) {
 			['000', 'Object does not exist'],
 			['001', 'Variables type is not a object'],
 			['002', 'Video object does not exist'],
-			['003', 'Video object format error'],
-			['004', 'Video object format error'],
-			['005', 'Video object format error'],
-			['006', '[error] does not exist '],
-			['007', 'Ajax error'],
-			['008', 'Ajax error'],
-			['009', 'Ajax object format error'],
-			['010', 'Ajax.status:[error]']
+			['003', 'Video object format errors'],
+			['004', 'Video object format errors'],
+			['005', 'Video object format errors'],
+			['006', '[errors] does not exist '],
+			['007', 'Ajax errors'],
+			['008', 'Ajax errors'],
+			['009', 'Ajax object format errors'],
+			['010', 'Ajax.status:[errors]']
 		];
 		//全局变量/变量类型：Array/功能：HTML5变速播放的值数组/如果不需要可以设置成null
 		this.playbackRateArr = [
@@ -881,7 +881,7 @@ layui.define('jquery', function(exports) {
 				fullID = 'full' + randomS, //全屏按钮
 				escFullID = 'escfull' + randomS, //退出全屏按钮
 				muteID = 'mute' + randomS, //静音按钮
-				escMuteID = 'escmute' + randomS, //取消静音按钮				
+				escMuteID = 'escmute' + randomS, //取消静音按钮
 				volumeID = 'volume' + randomS, //音量调节框容器
 				volumeDbgID = 'volumedbg' + randomS, //音量调节框容器背景
 				volumeBgID = 'volumebg' + randomS, //音量调节框背景层
@@ -4199,7 +4199,7 @@ layui.define('jquery', function(exports) {
 			}
 		},
 		/*
-		 下面列出只有flashplayer里支持的 
+		 下面列出只有flashplayer里支持的
 		 */
 		videoRotation: function(n) {
 			if (!this.loaded) {
@@ -4687,7 +4687,7 @@ layui.define('jquery', function(exports) {
 		/*
 			操作动作结束
 			-----------------------------------------------------------------------
-			
+
 			接口函数
 			获取元数据部分
 		*/
@@ -6758,7 +6758,7 @@ layui.define('jquery', function(exports) {
 			}
 			var errorVal = er[1];
 			if (!this.isUndefined(val)) {
-				errorVal = errorVal.replace('[error]', val);
+				errorVal = errorVal.replace('[errors]', val);
 			}
 			var value = 'error ' + er[0] + ':' + errorVal;
 			try {

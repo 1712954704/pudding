@@ -30,12 +30,12 @@ class IndexController extends Controller
             // If you provided a 'default_access_token', the '{access-token}' is optional.
             $response = $fb->get('/me', '{access-token}');
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            // When Graph returns an error
-            echo 'Graph returned an error: ' . $e->getMessage();
+            // When Graph returns an errors
+            echo 'Graph returned an errors: ' . $e->getMessage();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             // When validation fails or other local issues
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            echo 'Facebook SDK returned an errors: ' . $e->getMessage();
             exit;
         }
 
