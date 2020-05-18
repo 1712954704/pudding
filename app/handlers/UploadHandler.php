@@ -8,7 +8,7 @@
 		// 只允许以下后缀名的图片文件上传
 		protected $photo = ["png", "jpg", "gif", 'jpeg','bmp'];
 		protected $video = ["mp4"];
-		protected $word = ["docx","doc"];
+		protected $word = ["docx"];
 		protected $byte = 1024 * 1024;
 
 		/**
