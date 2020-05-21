@@ -18,7 +18,7 @@
 		 * type 类型
 		 * return array   code 0 正常 1 文件大小验证不通过  2 文件类型验证不通过
 		*/
-		public function verify($file, $size ,$type =''){
+		public function verify($file, $size,$type=''){
 
 //			dd($file->extension());  获取文件后缀名
 //			dd($file->getClientOriginalExtension());
