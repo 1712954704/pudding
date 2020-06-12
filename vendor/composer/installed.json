@@ -1318,7 +1318,7 @@
         },
         "time": "2020-04-16T23:44:31+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Html2Text\\": [
@@ -1825,7 +1825,7 @@
                 }
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Maatwebsite\\Excel\\": "src/"
@@ -2542,7 +2542,7 @@
         },
         "time": "2014-06-05T11:42:24+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "pclzip.lib.php"
@@ -2855,7 +2855,7 @@
         },
         "time": "2018-07-13T14:12:34+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "PhpOffice\\Common\\": "src/Common/"
@@ -2935,7 +2935,7 @@
         },
         "time": "2020-03-02T13:09:03+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "PhpOffice\\PhpSpreadsheet\\": "src/PhpSpreadsheet"
@@ -3026,7 +3026,7 @@
                 "dev-develop": "0.18-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "PhpOffice\\PhpWord\\": "src/PhpWord"
@@ -6574,7 +6574,7 @@
                 "dev-develop": "2.7.x-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Zend\\Escaper\\": "src/"

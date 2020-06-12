@@ -9,6 +9,8 @@ class WxAboutController extends Controller
         /**
          * 微信服务器配置
          */
+
+        dd("测试");
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
