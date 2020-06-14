@@ -37,23 +37,15 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-//            'channels' => ['single'],
-            'channels' => ['daily'],
+            'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
-	
-		'single' => [
-			'driver' => 'single',
-			'path' => storage_path('logs/laravel.log.'.date('Ymd',time())),
-			'level' => 'debug',
-			'days' => 14,
-		],
-	
-//        'single' => [
-//            'driver' => 'single',
-//            'path' => storage_path('logs/laravel.log'),
-//            'level' => 'debug',
-//        ],
+
+        'single' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => 'debug',
+        ],
 
         'daily' => [
             'driver' => 'daily',
@@ -102,6 +94,10 @@ return [
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
+        ],
+
+        'emergency' => [
+            'path' => storage_path('logs/laravel.log'),
         ],
     ],
 

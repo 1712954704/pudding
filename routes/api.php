@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,8 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::namespace('Api')->group(function () {
-    Route::get('face', 'IndexController@face');                         // 测试Facebook
-    Route::get('google', 'GoogleControler@google');                     // 测试Google广告分析接口
-    Route::get('faceBook', 'FaceBookController@faceBook');              // 测试Facebook广告分析接口
-    Route::get('wxAbout','WxAboutController@deploy');                   // 纯牛奶小布丁公众号服务器配置测试
+
+
+Route::namespace("api")->group(function(){
+    Route::get("test","TestController@test");      // 测试api
 });

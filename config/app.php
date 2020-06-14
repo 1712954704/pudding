@@ -33,13 +33,13 @@ return [
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
-    | When your application is in debug mode, detailed errors messages with
-    | stack traces will be shown on every errors that occurs within your
-    | application. If disabled, a simple generic errors page is shown.
+    | When your application is in debug mode, detailed error messages with
+    | stack traces will be shown on every error that occurs within your
+    | application. If disabled, a simple generic error page is shown.
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -122,14 +122,6 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-	
-	// 按日期切割日志
-	'log' => 'daily',
-	// 日志最大数
-	'log_max_files' => 30,
-	// 日志文件名
-//	'log_name' => 'pudding.log.'.date('Ymd',time()),
-	'log_name' => 'pudding',
 
     /*
     |--------------------------------------------------------------------------
@@ -215,6 +207,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
@@ -235,4 +228,5 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
 ];

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +12,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,24 +38,22 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
 //        Route::get('table','TableController@index');            // 后台表格首页
 //        Route::get('append','TableController@add');              // 后台表格添加
         Route::resource('table', 'TableController');              //后台表格资源路由
-		Route::post('table/{id}','TableController@infor');			// soultable重载数据表格
-		Route::resource('drama', 'DramaController');              //后台番剧资源路由
-		Route::post('drama/{id}', 'DramaController@infor');       //soultable重载数据番剧
-		Route::get('play', 'DramaController@play');               //視頻播放
-		Route::resource('article','ArticleController');			// 文章资源路由
-		Route::post('article/{id}', 'ArticleController@infor');     //soultable重载数据文章
-		Route::resource('label','LabelController');			  // 标签资源路由
-		Route::post('label/{id}', 'LabelController@infor');     //soultable重载数据标签
-		Route::resource('convert', 'ConvertController');     		// word转txt测试
-		Route::post('analysis', 'ConvertController@analysis');    // word上传并解析
-	});
+        Route::post('table/{id}','TableController@infor');			// soultable重载数据表格
+        Route::resource('drama', 'DramaController');              //后台番剧资源路由
+        Route::post('drama/{id}', 'DramaController@infor');       //soultable重载数据番剧
+        Route::get('play', 'DramaController@play');               //視頻播放
+        Route::resource('article','ArticleController');			// 文章资源路由
+        Route::post('article/{id}', 'ArticleController@infor');     //soultable重载数据文章
+        Route::resource('label','LabelController');			  // 标签资源路由
+        Route::post('label/{id}', 'LabelController@infor');     //soultable重载数据标签
+        Route::resource('convert', 'ConvertController');     		// word转txt测试
+        Route::post('analysis', 'ConvertController@analysis');    // word上传并解析
+    });
 });
 
 
 Route::group(['namespace'=>'Tool','prefix'=>'tool'],function(){
-	Route::post('uploadVideo', 'UploadController@video');			// 视频上传
-	Route::post('uploadRichImg', 'UploadController@richImage');	// 图片上传
-	Route::post('delFile', 'UploadController@delFile');	       // 文件删除
+    Route::post('uploadVideo', 'UploadController@video');			// 视频上传
+    Route::post('uploadRichImg', 'UploadController@richImage');	// 图片上传
+    Route::post('delFile', 'UploadController@delFile');	       // 文件删除
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

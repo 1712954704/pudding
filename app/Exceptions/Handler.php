@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -30,10 +30,12 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
+     *
+     * @throws \Exception
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -42,10 +44,12 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         //如果路由中含有“admin/”，则说明是一个 后台 的接口请求
         if ($request->is('admin/*')) {
@@ -61,9 +65,17 @@ class Handler extends ExceptionHandler
                     return response()->json($result);
                 }
             }
-        }else if ($exception instanceof \App\Exceptions\CustomException)  {
-			return $exception->render($request);
-		}
+        }else if($request->is('api/*')){
+            if ($exception instanceof ValidationException) {
+                $result = [
+                    'code'  => 416,
+                    'msg'   => array_values($exception->errors())[0][0],
+                    'data'  => '',
+                    'count' => '',
+                ];
+                return response()->json($result);
+            }
+        }
         return parent::render($request, $exception);
     }
 }

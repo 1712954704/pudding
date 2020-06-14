@@ -54,23 +54,6 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-		
-		'drama' => [				// 驱动名
-			'driver' => 'local',   // 驱动设置 本地
-			'root' => storage_path('app/public'),   // 指定的默认路径
-			'url' => env('APP_URL').'/storage',	 // 指定url路径
-			'visibility' => 'public',      // 文件可以声明为 public 或 private。如果一个文件被声明为 public，意味着其他人可以访问
-			'permissions' => [
-				'file' => [
-					'public' => 0664,
-					'private' => 0600,
-				],
-				'dir' => [
-					'public' => 0775,
-					'private' => 0700,
-				],
-			],
-		],
 
         's3' => [
             'driver' => 's3',
@@ -79,8 +62,40 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'drama' => [				// 驱动名
+            'driver' => 'local',   // 驱动设置 本地
+            'root' => storage_path('app/public'),   // 指定的默认路径
+            'url' => env('APP_URL').'/storage',	 // 指定url路径
+            'visibility' => 'public',      // 文件可以声明为 public 或 private。如果一个文件被声明为 public，意味着其他人可以访问
+            'permissions' => [
+                'file' => [
+                    'public' => 0664,
+                    'private' => 0600,
+                ],
+                'dir' => [
+                    'public' => 0775,
+                    'private' => 0700,
+                ],
+            ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Symbolic Links
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the symbolic links that will be created when the
+    | `storage:link` Artisan command is executed. The array keys should be
+    | the locations of the links and the values should be their targets.
+    |
+    */
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

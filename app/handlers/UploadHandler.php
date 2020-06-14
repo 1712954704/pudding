@@ -18,7 +18,7 @@
 		 * type 类型
 		 * return array   code 0 正常 1 文件大小验证不通过  2 文件类型验证不通过
 		*/
-		public function verify($file, $size,$type=''){
+		public function verify($file, $size ,$type =''){
 
 //			dd($file->extension());  获取文件后缀名
 //			dd($file->getClientOriginalExtension());
@@ -27,7 +27,7 @@
 				'msg'  => '',
 			];
 			//限制上传文件的大小
-			if ($file->getClientSize() >= ($size * $this->byte)) {
+			if ($file->getSize() >= ($size * $this->byte)) {
 				$data['code'] = 1;
 				$data['msg'] = '请上传'.$size.'兆以内的文件';
 				return $data;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/html2text/html2text" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/maatwebsite/excel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/pclzip/pclzip" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/phpoffice/common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/phpoffice/phpword" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/zendframework/zend-escaper" vcs="Git" />
+  </component>
+</project>

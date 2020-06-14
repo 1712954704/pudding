@@ -51,15 +51,14 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-
 //.env配置多环境
 $env = $app->detectEnvironment(function () use($app) {
-	$environmentPath = $app->environmentPath();//.env所在目录
-	// putenv("APP_ENV=$setEnv");//写入env     //getenv('APP_ENV');//获取env
-	$setEnv = trim(file_get_contents($environmentPath.'/.env'));//获取.env文件内容
-	if(file_exists($environmentPath)) {
-		$app->loadEnvironmentFrom('.env.'.$setEnv);
-	}
+    $environmentPath = $app->environmentPath();//.env所在目录
+    // putenv("APP_ENV=$setEnv");//写入env     //getenv('APP_ENV');//获取env
+    $setEnv = trim(file_get_contents($environmentPath.'/.env'));//获取.env文件内容
+    if(file_exists($environmentPath)) {
+        $app->loadEnvironmentFrom('.env.'.$setEnv);
+    }
 });
 
 return $app;

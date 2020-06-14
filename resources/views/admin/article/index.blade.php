@@ -311,7 +311,7 @@
                             // url:'/admin/staff_del',
                             url: "{{url('/admin/article')}}"+'/'+json['id'],
                             method:'delete',
-                            data:{"id":json['id']},
+                            data:{"id":json['id'],'_token':"{{ csrf_token()}}" },
                             dataType:'JSON',
                             async : true,
                             headers: {

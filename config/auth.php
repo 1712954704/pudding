@@ -48,8 +48,8 @@ return [
         ],
 
         'user' => [
-          'driver' => 'session',
-          'provider' => 'user',
+            'driver' => 'session',
+            'provider' => 'user',
         ],
     ],
 
@@ -76,10 +76,10 @@ return [
             'model' => App\Models\Front\Users::class,
         ],
 
-//        'users' => [
-//            'driver' => 'eloquent',
-//            'model' => App\User::class,
-//        ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -107,6 +107,7 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 
