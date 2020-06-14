@@ -11,22 +11,27 @@ class DeployController extends Controller
      * 微信配置
     */
     public function index(){
+        // 缓存微信信息
+        $res = $_GET["echostr"];
+        file_put_contents("wx.text",$res);
+
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
+        $echostr = $_GET["echostr"];
 
         $token = "g72q5zi7AC9Tyv7gCwS7BeoqzBTpL5k6";
         $tmpArr = array($token, $timestamp, $nonce);
-        $res = $_GET["signature"];
-        file_put_contents("wx.text",$res);
         sort($tmpArr, SORT_STRING);
         $tmpStr = implode( $tmpArr );
         $tmpStr = sha1( $tmpStr );
 
         if( $tmpStr == $signature ){
-            return true;
+            echo $echostr;
+//            return true;
         }else{
-            return false;
+            echo "err";
+//            return false;
         }
     }
 }

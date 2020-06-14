@@ -4,7 +4,6 @@
     <list default="true" id="7aaf9fa9-4ced-411c-9283-e64b68ae1511" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Wx/DeployController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Wx/DeployController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +159,7 @@
       <option name="presentableId" value="Default" />
       <updated>1592095762608</updated>
       <workItem from="1592095765231" duration="6600000" />
-      <workItem from="1592107059560" duration="8535000" />
+      <workItem from="1592107059560" duration="9497000" />
     </task>
     <servers />
   </component>
