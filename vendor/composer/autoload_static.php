@@ -515,6 +515,7 @@ class ComposerStaticInit09e19d29862dd830eeeb70aa6d1d4914
         'App\\Http\\Controllers\\Admin\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LoginController.php',
         'App\\Http\\Controllers\\Admin\\TableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TableController.php',
         'App\\Http\\Controllers\\Api\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/TestController.php',
+        'App\\Http\\Controllers\\Api\\Wx\\DeployController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Wx/DeployController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Tool\\UploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/Tool/UploadController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

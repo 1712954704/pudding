@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\LoginController' => $baseDir . '/app/Http/Controllers/Admin/LoginController.php',
     'App\\Http\\Controllers\\Admin\\TableController' => $baseDir . '/app/Http/Controllers/Admin/TableController.php',
     'App\\Http\\Controllers\\Api\\TestController' => $baseDir . '/app/Http/Controllers/Api/TestController.php',
+    'App\\Http\\Controllers\\Api\\Wx\\DeployController' => $baseDir . '/app/Http/Controllers/Api/Wx/DeployController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Tool\\UploadController' => $baseDir . '/app/Http/Controllers/Tool/UploadController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
