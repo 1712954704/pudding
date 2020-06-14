@@ -20,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::namespace("api")->group(function(){
+Route::namespace("Api")->group(function(){
     Route::get("test","TestController@test");      // 测试api
 });
 
 // 微信相关
 //Route::prefix('wx')->namespace('api\wx')->group(function(){
-Route::group(['namespace'=>'api\wx','prefix'=>'wx'],function(){
+Route::group(['namespace'=>'Api\Wx','prefix'=>'wx'],function(){
     Route::get('deploy',"DeployController@index");  // 微信
 });
